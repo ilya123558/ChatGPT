@@ -1,0 +1,80 @@
+.wrapper {
+    padding-bottom: 40px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.blurEffect{
+    position: absolute;
+    width: 100%;
+    background-color: #373942;
+    height: 100%;
+    filter: blur(25px);
+    z-index: 0;
+}
+
+.myTextarea {
+    min-width: 700px;
+    width: 700px;
+    margin-left: -18px;
+    background-color: #40414f;
+    border-radius: 5px;
+    padding: 12px 0px 10px 16px;
+    position: relative;
+    box-shadow: 0px 0px 7px rgba(#000, .3);
+}
+
+.textarea {
+    resize: none;
+    width: 100%;
+    background-color: inherit;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-size: 16px;
+    color: rgba(255, 255, 255, .9);
+    border: none;
+    padding-right: 30px;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #565869;
+        border-radius: 10px;
+
+        &:hover {
+            background-color: rgba(243, 240, 240, 0.8);
+        }
+    }
+}
+
+.sendMessage {
+    transform: rotate(90deg);
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 3px 0px 3px;
+    color: rgb(172, 172, 190);
+    transition: all 0.3s;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 2;
+
+    svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    &:hover {
+        background-color: #202123;
+    }
+}
