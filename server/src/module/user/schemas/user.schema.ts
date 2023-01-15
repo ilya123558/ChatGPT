@@ -11,6 +11,9 @@ export const UserSchema = new Schema(
       required: [true],
       maxlength: [66],
     },
+    nonce: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

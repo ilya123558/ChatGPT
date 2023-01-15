@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res, UseGuards, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Post, Res, UseGuards, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 
@@ -27,7 +27,7 @@ export class AuthController {
     return user;
   }
 
-  @Post('/logout')
+  @Delete('/logout')
   @UseGuards(AuthGuard('jwt'))
   async logout(@GetUser() user: IReadableUser, @Res({ passthrough: true }) res: Response): Promise<boolean> {
     this.authService.clearJWTCookie(res);

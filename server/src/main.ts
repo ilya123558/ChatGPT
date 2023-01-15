@@ -3,7 +3,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
-import cors from 'cors';
+import * as cors from 'cors';
 
 import { AppModule } from './app.module';
 
@@ -44,7 +44,7 @@ async function bootstrap() {
   SwaggerModule.setup('swagger', app, document);
 
   app.use(cookieParser());
-  app.enableCors(cors);
+  app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 
   await app.listen(process.env.SERVER_PORT);
 }

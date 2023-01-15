@@ -1,6 +1,7 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { CryptoUtil } from 'src/utils/crypto.util';
 
 import { TokenModule } from '../token/token.module';
 import { UserModule } from '../user/user.module';
@@ -10,7 +11,7 @@ import { JwtStrategy } from './strategy/jwt.strategy';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy, CryptoUtil, Logger],
   imports: [
     UserModule,
     TokenModule,
