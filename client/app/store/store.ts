@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { userAPI } from "../services/UserService.api";
+import { authAPI } from "../services/AuthService.api";
 
 const rootReducer = combineReducers({
     [userAPI.reducerPath]: userAPI.reducer,
+    [authAPI.reducerPath]: authAPI.reducer,
 });
 
 export const store = () => {
@@ -11,6 +13,7 @@ export const store = () => {
         middleware: (getDefaultMiddleware) => (
             getDefaultMiddleware()
                 .concat(userAPI.middleware)
+                .concat(authAPI.middleware)
         )
     });
 };
