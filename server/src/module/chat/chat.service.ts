@@ -1,15 +1,42 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model, Types } from 'mongoose';
 import { OpenAIApi } from 'openai';
 
 import { configuration } from 'src/config/openai.config';
+import { IUser } from '../user/interfaces/user.interface';
+import { CreateChatDto } from './dto/create-chat.dto';
 import { MessageDto } from './dto/message.dto';
 import { IAnswer } from './interfaces/answer.interface';
+import { IChat } from './interfaces/chat.interface';
 
 @Injectable()
 export class ChatService {
   readonly OPENAI = new OpenAIApi(configuration);
 
-  async processMessage(messageDto: MessageDto): Promise<IAnswer> {
+  constructor(@InjectModel('Chat') private readonly chatModel: Model<IChat>) {}
+
+  async createOrUpdate(createChatDto: CreateChatDto): Promise<IChat> {
+    const chat = this.findById(createChatDto.user._id);
+
+    if (!chat) {
+      const createdChat = new this.chatModel(createChatDto);
+
+      return await createdChat.save();
+    }
+
+    // return await this.update(createChatDto.user._id, {createChatDto.chat});
+  }
+
+  async findById(_id: Types.ObjectId): Promise<IChat> {
+    return await this.chatModel.findById(_id).populate('user').exec();
+  }
+
+  async update(_id: Types.ObjectId, payload: Partial<IChat>): Promise<IChat> {
+    return await this.chatModel.findByIdAndUpdate(_id, payload).exec();
+  }
+
+  async processMessage(user: IUser, messageDto: MessageDto): Promise<IAnswer> {
     try {
       const response = await this.OPENAI.createCompletion({
         model: 'text-davinci-003',
@@ -20,6 +47,8 @@ export class ChatService {
         frequency_penalty: 0.5, // Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
         presence_penalty: 0, // Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
       });
+
+      // await this.createOrUpdate({ user, name: messageDto.chatName });
 
       return { answer: response.data.choices[0].text };
     } catch (error) {

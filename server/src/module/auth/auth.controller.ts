@@ -23,7 +23,11 @@ export class AuthController {
     const user = extensionAuthResponse.user;
     this.authService.addJWTCookie(user.accessToken, res);
 
-    return user;
+    return {
+      _id: user._id,
+      name: user.name,
+      address: user.address,
+    } as IUser;
   }
 
   @Delete('/logout')
