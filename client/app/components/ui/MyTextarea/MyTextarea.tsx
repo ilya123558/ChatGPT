@@ -8,8 +8,6 @@ const MyTextarea: React.FC = () => {
     const [value, setValue] = useState('')
     const [height, setHeight] = useState(19)
 
-    console.log(textareaRef.current?.scrollHeight, height)
-
     useEffect(() => {
         if ((height < 19 * 4)) {
             (async () => await setHeight((prev) => {

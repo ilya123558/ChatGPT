@@ -1,17 +1,18 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IUser } from "../models/IUser";
-
 
 export const userAPI = createApi({
     reducerPath: "userAPI",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:5000/",
+        baseUrl: "http://localhost:9000/api/user",
     }),
     endpoints: (build) => ({
-        fetchUsers: build.query<IUser[], string>({
-            query: () => `users`
+        getHach: build.query<any, string>({
+            query: (address) => ({
+                url: `/nonce/${address}`,
+                method: 'GET'
+            })
         }),
     }),
 });
 
-export const { useFetchUsersQuery } = userAPI
+export const { useGetHachQuery } = userAPI
