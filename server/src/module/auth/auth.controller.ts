@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { ExtensionAuthDto } from './dto/extension-auth.dto';
 import { IUser } from '../user/interfaces/user.interface';
 import { ApiTags } from '@nestjs/swagger';
+import { GetUser } from 'src/components/decorators/get-user.decorator';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -27,9 +28,9 @@ export class AuthController {
 
   @Delete('/logout')
   @UseGuards(AuthGuard('jwt'))
-  async logout(@Body() userId: string, @Res({ passthrough: true }) res: Response): Promise<boolean> {
+  async logout(@GetUser() user: IUser, @Res({ passthrough: true }) res: Response): Promise<boolean> {
     this.authService.clearJWTCookie(res);
 
-    return await this.authService.logout(userId);
+    return await this.authService.logout(String(user._id));
   }
 }
