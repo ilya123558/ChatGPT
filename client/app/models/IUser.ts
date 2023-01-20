@@ -1,3 +1,9 @@
 export interface IUser {
-  id: number,
+  _id: string,
+  address : string,
+  createdAt : string,
+  name: string,
+  nonce: string,
+  updatedAt: string,
+  __v: number
 }
