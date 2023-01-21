@@ -7,11 +7,16 @@
   src: url('/fonts/Roboto-Regular.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Roboto-Light';
+  src: url('/fonts/Roboto-Light.ttf') format('truetype');
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto-Regular', sans-serif;
   font-size: 13px;
 }
 

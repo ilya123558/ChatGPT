@@ -4,6 +4,8 @@
     height: 100vh;
     min-width: 260px;
     background-color: rgba(32,33,35);
+    position: relative;
+    z-index: 4;
 }
 
 .wrapper{
@@ -13,5 +15,10 @@
     padding: 7px 0;
     width: 240px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.buttonsInner{
+    border-top: 1px solid rgba(255,255,255, 0.3);
 }
