@@ -23,4 +23,4 @@ export const userAPI = createApi({
     }),
 });
 
-export const { useGetUserQuery, useLazyGetUserQuery, useGetUserNonceQuery } = userAPI
+export const { useGetUserQuery, useLazyGetUserQuery } = userAPI

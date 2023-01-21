@@ -4,23 +4,23 @@ import { useRouter } from 'next/router';
 import Main from '@components/Main/Main'
 import Meta from '@utils/meta/Meta'
 import { useEffect } from 'react';
+import Loading from '@components/ui/Loading/Loading';
+import { useAppSelector } from '@hooks/redux';
 
 
 export default function Home() {
 
+  const loading = useAppSelector(state => state.loading.loading)
+
   const router = useRouter();
-  const { data, isLoading, error } = useGetUserQuery(null)
+  const { isLoading, error } = useGetUserQuery(null)
 
   useEffect(() => {
-    if (!data && !isLoading) {
+    if (error) {
       router.push('/auth/login')
     }
 
-    if(error) {
-      router.push('/auth/login')
-    }
-
-  }, [data, isLoading, error])
+  }, [error])
 
   return (
     <>
@@ -28,9 +28,12 @@ export default function Home() {
       {
         isLoading
           ?
-          <div>loading...</div>
+          <Loading />
           :
-          <Main />
+          <>
+            {loading && <Loading />}
+            <Main />
+          </>
       }
     </>
   )

@@ -1,13 +1,13 @@
 import { useSingInMutation } from '@services/AuthService.api';
 import { ProviderRpcClient } from "everscale-inpage-provider";
 import { useEffect, useState } from 'react';
-import LoginBtn from '../LoginBtn/LoginBtn';
+import LoginBtn from '../buttons/LoginBtn/LoginBtn';
 import styles from './AuthLogin.module.scss';
 import { signInFunction } from '@utils/auth/signIn';
 import { useRouter } from 'next/router';
 import { useGetUserQuery } from '@services/UserService.api';
 
-const AuthLogin = () => {
+const AuthLogin: React.FC = () => {
 
     const provider = new ProviderRpcClient();
     
@@ -41,8 +41,8 @@ const AuthLogin = () => {
                     </>
                     :
                     <div className={styles.warning}>
-                        <h3>Расширение не установленно!!!</h3>
-                        <p >Установите <strong>Ever Wallet</strong> на ваш браузер</p>
+                        <h3>The extension is not set!!!</h3>
+                        <p >Install <strong>Ever Wallet</strong> in your browser</p>
                     </div>
             }
 
