@@ -12,4 +12,8 @@ export class ChatDto {
   @ApiProperty()
   @IsString()
   message: string;
+
+  @ApiProperty()
+  @IsString()
+  model: string;
 }

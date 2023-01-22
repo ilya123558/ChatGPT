@@ -2,6 +2,7 @@ import { Controller, Get, Logger, NotFoundException, Param, UnauthorizedExceptio
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 import { GetUser } from 'src/components/decorators/get-user.decorator';
+import { APP } from 'src/config/app.config';
 import { CryptoUtil } from 'src/utils/crypto.util';
 import { IUser } from './interfaces/user.interface';
 import { UserService } from './user.service';
@@ -16,7 +17,7 @@ export class UserController {
   ) {}
 
   @Get()
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard(APP.JWT))
   async getAuthorizeUser(@GetUser() user: IUser): Promise<IUser> {
     if (user) {
       return user;
