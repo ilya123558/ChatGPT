@@ -5,6 +5,7 @@ import LogoutBtn from '@components/ui/buttons/LogoutBtn/LogoutBtn';
 import styles from './Sidebar.module.scss';
 import { useAppDispatch } from '@hooks/redux';
 import { setActiveChatIndex } from 'slices/MainSlice';
+import LoadingWriteMessage from '@components/ui/LoadingWriteMessage/LoadingWriteMessage';
 
 const Sidebar: React.FC = () => {
 

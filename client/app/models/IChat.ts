@@ -17,9 +17,9 @@ export interface IChat {
 }
 
 export interface IMessage {
-  entity: string
+  entity?: string
   message: string
-  _id: string
+  _id?: string
 }
 
 export interface IUpdataChatName {

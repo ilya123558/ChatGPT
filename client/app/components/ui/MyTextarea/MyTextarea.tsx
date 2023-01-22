@@ -1,14 +1,14 @@
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { useGetAllChatsQuery, useSendMessageOrCreateChatMutation } from '@services/ChatService.api';
 import React, { useEffect, useRef, useState } from 'react';
-import { setActiveChatIndex, setLoading } from 'slices/MainSlice';
+import { setActiveChatIndex, setLoading, setNewMessage } from 'slices/MainSlice';
 import styles from './MyTextarea.module.scss';
 
 const MyTextarea: React.FC = () => {
 
     const dispatch = useAppDispatch()
     const activeChatIndex = useAppSelector(state => state.state.activeChatIndex)
-
+    
     const [sendMessage, { isLoading }] = useSendMessageOrCreateChatMutation()
     const { data } = useGetAllChatsQuery(null)
 
@@ -29,21 +29,44 @@ const MyTextarea: React.FC = () => {
 
     }, [textareaRef.current?.scrollHeight])
 
+
     useEffect(() => {
         dispatch(setLoading(isLoading))
     }, [isLoading])
 
     const postMessage = async () => {
+        const message = value
+        await setValue('')
+
+        if (value.trim().length < 4) {
+            setValue(() => '')
+            return
+        }
         if (activeChatIndex !== null && data) {
-            await sendMessage({ message: value, chatName: data[activeChatIndex].name, chatId: data[activeChatIndex]._id })
+            await dispatch(setNewMessage({
+                loadingBotMessage: true,
+                chatId: data[activeChatIndex]._id,
+                typeMessage: 'sendMessage',
+                message
+            }))
+            await sendMessage({ message, chatName: data[activeChatIndex].name, chatId: data[activeChatIndex]._id })
+            await dispatch(setNewMessage({ loadingBotMessage: false }))
         }
         else {
-            await sendMessage({ message: value, chatName: 'new chat' })
+            await dispatch(setNewMessage({
+                loadingBotMessage: true,
+                typeMessage: 'createChatAndSendMessage',
+                message
+            }))
+            await sendMessage({
+                message,
+                chatName: `${message.split(' ').slice(0, 6).join(' ')} ${message.split(' ').length > 6 ? '...' : ''}`
+            })
+            await dispatch(setNewMessage({ loadingBotMessage: false }))
             data && await dispatch(setActiveChatIndex(data.length))
         }
 
         await setHeight(() => 19)
-        await setValue('')
     }
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -82,5 +105,4 @@ const MyTextarea: React.FC = () => {
 };
 
 export default MyTextarea;
-
 

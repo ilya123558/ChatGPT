@@ -1,13 +1,18 @@
 import { IMessage } from 'models/IChat';
 import { useState } from 'react';
+import LoadingWriteMessage from '../LoadingWriteMessage/LoadingWriteMessage';
 import styles from './BotMessage.module.scss';
 
-const BotMessage: React.FC<IMessage> = ({message}) => {
+interface IProps extends IMessage {
+    loading?: boolean | undefined
+}
+
+const BotMessage: React.FC<IProps> = ({ message, loading }) => {
 
     const [evoluation, setEvoluation] = useState('')
 
     const clickLikeHandler = () => {
-        if(evoluation === 'like') {
+        if (evoluation === 'like') {
             setEvoluation(() => '')
             return
         }
@@ -15,7 +20,7 @@ const BotMessage: React.FC<IMessage> = ({message}) => {
     }
 
     const clickDisikeHandler = () => {
-        if(evoluation === 'disike') {
+        if (evoluation === 'disike') {
             setEvoluation(() => '')
             return
         }
@@ -31,19 +36,26 @@ const BotMessage: React.FC<IMessage> = ({message}) => {
                     </svg>
                 </div>
 
-                <div className={styles.text}>{message}</div>
-                <div className={styles.evoluation}>
-                    <button className={styles.btn} onClick={clickLikeHandler}>
-                        <svg className={styles.like + ' ' + (evoluation === 'like' ? styles.like__active : '')} stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
-                        </svg>
-                    </button>
-                    <button className={styles.btn} onClick={clickDisikeHandler}>
-                        <svg className={styles.dislike + ' ' + (evoluation === 'disike' ? styles.dislike__active : '')} stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path>
-                        </svg>
-                    </button>
-                </div>
+                {loading
+                    ?
+                    <div className={styles.loadingWriteMessageInner}><LoadingWriteMessage /></div>
+                    :
+                    <>
+                        <div className={styles.text}>{message}</div>
+                        <div className={styles.evoluation}>
+                            <button className={styles.btn} onClick={clickLikeHandler}>
+                                <svg className={styles.like + ' ' + (evoluation === 'like' ? styles.like__active : '')} stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                                </svg>
+                            </button>
+                            <button className={styles.btn} onClick={clickDisikeHandler}>
+                                <svg className={styles.dislike + ' ' + (evoluation === 'disike' ? styles.dislike__active : '')} stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </>
+                }
             </div>
         </div >
     );

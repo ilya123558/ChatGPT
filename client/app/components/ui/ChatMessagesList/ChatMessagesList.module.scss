@@ -30,10 +30,13 @@
 .newChat{
     max-width:750px;
     width: 100%;
+    padding: 0px 30px;
+    background-color: #3e3f4b;
+    border-radius: 5px;
 }
 
 .newChatText{
-    padding-bottom: 40px;
+    padding: 20px 0px;
     font-size: 18px;
     font-family: 'Roboto-Light';
 }
