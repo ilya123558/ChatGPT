@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <>
-      <Meta title='Chat' description='chat' />
+      <Meta title='ChatGPT' description='chat' />
       {
         isLoading
           ?

@@ -5,7 +5,7 @@ import Meta from '@utils/meta/Meta';
 const LoginPage: React.FC = () => {
     return (
         <>
-            <Meta title='login' />
+            <Meta title='Authorization' />
             <section className={styles.sectionLogin}>
                 <AuthLogin />
             </section>
