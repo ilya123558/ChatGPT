@@ -1,9 +1,16 @@
+import { useAppDispatch } from '@hooks/redux';
+import { useDeleteAllChatsMutation } from '@services/ChatService.api';
+import { setActiveChatIndex } from 'slices/MainSlice';
 import CommonBtn from '../CommonBtn/CommonBtn';
 
 const DeleteChatListBtn: React.FC = () => {
 
-    const onClickHandler = () => {
-        console.log('deleteChatList')
+    const dispatch = useAppDispatch()
+    const [deleteAllChats] = useDeleteAllChatsMutation()
+
+    const onClickHandler = async() => {
+        await deleteAllChats(null)
+        dispatch(setActiveChatIndex(null))
     }
 
     return (

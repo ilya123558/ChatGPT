@@ -1,14 +1,16 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-import loadingSlice from '../slices/LoadingSlice'
+import mainSlice from '../slices/MainSlice'
 
 import { userAPI } from "../services/UserService.api";
 import { authAPI } from "../services/AuthService.api";
+import { chatAPI } from "@services/ChatService.api";
 
 const rootReducer = combineReducers({
-    loading: loadingSlice,
+    state: mainSlice,
     [userAPI.reducerPath]: userAPI.reducer,
     [authAPI.reducerPath]: authAPI.reducer,
+    [chatAPI.reducerPath]: chatAPI.reducer
 });
 
 export const store = () => {
@@ -18,6 +20,7 @@ export const store = () => {
             getDefaultMiddleware()
                 .concat(userAPI.middleware)
                 .concat(authAPI.middleware)
+                .concat(chatAPI.middleware)
         )
     });
 };

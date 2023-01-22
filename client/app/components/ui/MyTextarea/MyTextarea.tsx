@@ -1,7 +1,16 @@
+import { useAppDispatch, useAppSelector } from '@hooks/redux';
+import { useGetAllChatsQuery, useSendMessageOrCreateChatMutation } from '@services/ChatService.api';
 import React, { useEffect, useRef, useState } from 'react';
+import { setActiveChatIndex, setLoading } from 'slices/MainSlice';
 import styles from './MyTextarea.module.scss';
 
 const MyTextarea: React.FC = () => {
+
+    const dispatch = useAppDispatch()
+    const activeChatIndex = useAppSelector(state => state.state.activeChatIndex)
+
+    const [sendMessage, { isLoading }] = useSendMessageOrCreateChatMutation()
+    const { data } = useGetAllChatsQuery(null)
 
     const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -20,9 +29,36 @@ const MyTextarea: React.FC = () => {
 
     }, [textareaRef.current?.scrollHeight])
 
+    useEffect(() => {
+        dispatch(setLoading(isLoading))
+    }, [isLoading])
+
+    const postMessage = async () => {
+        if (activeChatIndex !== null && data) {
+            await sendMessage({ message: value, chatName: data[activeChatIndex].name, chatId: data[activeChatIndex]._id })
+        }
+        else {
+            await sendMessage({ message: value, chatName: 'new chat' })
+            data && await dispatch(setActiveChatIndex(data.length))
+        }
+
+        await setHeight(() => 19)
+        await setValue('')
+    }
+
+    const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+
+        const eventValue = event.target.value
+
+        if (eventValue[eventValue.length - 1] === '\n') {
+            postMessage()
+            return
+        }
+        setValue(eventValue)
+    }
+
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.blurEffect}></div>
+        <div className={styles.myTextareaInner}>
             <div className={styles.myTextarea}>
                 <textarea
                     ref={textareaRef}
@@ -32,16 +68,15 @@ const MyTextarea: React.FC = () => {
                         overflowY: height < 19 * 4 ? 'hidden' : 'scroll'
                     }}
                     value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    onChange={onChangeHandler}
                 />
-                <button className={styles.sendMessage}>
+                <button className={styles.sendMessage} onClick={() => postMessage()}>
                     <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 20 20" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                         <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
                     </svg>
                 </button>
             </div>
         </div>
-
 
     );
 };

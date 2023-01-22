@@ -1,6 +1,7 @@
+import { IMessage } from 'models/IChat';
 import styles from './UserMessage.module.scss';
 
-const UserMessage: React.FC = () => {
+const UserMessage: React.FC<IMessage> = ({message}) => {
     return (
         <div className={styles.userMessage}>
             <div className={styles.wrapper}>
@@ -9,7 +10,7 @@ const UserMessage: React.FC = () => {
                         <path fillRule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
                     </svg>
                 </div>
-                <div className={styles.text}>userMessage</div>
+                <div className={styles.text}>{message}</div>
             </div>
         </div>
     );

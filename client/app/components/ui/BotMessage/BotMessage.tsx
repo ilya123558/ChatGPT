@@ -1,7 +1,8 @@
+import { IMessage } from 'models/IChat';
 import { useState } from 'react';
 import styles from './BotMessage.module.scss';
 
-const BotMessage = () => {
+const BotMessage: React.FC<IMessage> = ({message}) => {
 
     const [evoluation, setEvoluation] = useState('')
 
@@ -30,7 +31,7 @@ const BotMessage = () => {
                     </svg>
                 </div>
 
-                <div className={styles.text}>botMessage</div>
+                <div className={styles.text}>{message}</div>
                 <div className={styles.evoluation}>
                     <button className={styles.btn} onClick={clickLikeHandler}>
                         <svg className={styles.like + ' ' + (evoluation === 'like' ? styles.like__active : '')} stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">
