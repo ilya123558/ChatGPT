@@ -29,12 +29,12 @@ export class ChatController {
     return await this.chatService.findAllByUserId(user._id);
   }
 
-  @Get('/models')
+  @Get('models')
   async findAllModels(): Promise<String[]> {
     return await this.chatService.findAllModels();
   }
 
-  @Put('update/:name')
+  @Put('update')
   @UseGuards(AuthGuard(APP.JWT))
   async changeName(@Body() changeNameDto: ChangeNameDto): Promise<IChat> {
     return await this.chatService.updateByPayload(new Types.ObjectId(changeNameDto.chatId), {
