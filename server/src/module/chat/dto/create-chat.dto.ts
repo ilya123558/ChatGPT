@@ -1,7 +1,7 @@
 import { IUser } from 'src/module/user/interfaces/user.interface';
+import { ChatDto } from './chat.dto';
 
-export class CreateChatDto {
+export class CreateChatDto extends ChatDto {
   user: IUser;
-  name: string;
-  chat: [{ entity: string }, { message: string }];
+  entity: string;
 }
