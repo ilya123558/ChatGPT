@@ -1,0 +1,68 @@
+.loadingWriteMessage{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 35px;
+    width: 100%;
+}
+
+.point1, .point2, .point3 {
+    width: 4px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.point1 {
+    animation: point1 0.8s infinite;
+}
+
+.point2{
+    animation: point2 0.8s infinite;
+}
+
+.point3{
+    animation: point3 0.8s infinite;
+}
+
+@keyframes point1 {
+    33%{
+        scale: 0;
+    }
+
+    66%{
+        scale: 1.1;
+    }
+
+    100%{
+        scale: 1;
+    }
+}
+
+@keyframes point2 {
+    33%{
+        scale: 1;
+    }
+
+    66%{
+        scale: 0;
+    }
+
+    100%{
+        scale: 1.1;
+    }
+}
+
+@keyframes point3 {
+    33%{
+        scale: 1.1;
+    }
+
+    66%{
+        scale: 1;
+    }
+
+    100%{
+        scale: 0;
+    }
+}

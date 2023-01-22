@@ -10,7 +10,7 @@ import { useAppSelector } from '@hooks/redux';
 
 export default function Home() {
 
-  const loading = useAppSelector(state => state.loading.loading)
+  const loading = useAppSelector(state => state.state.loading)
 
   const router = useRouter();
   const { isLoading, error } = useGetUserQuery(null)
@@ -24,14 +24,14 @@ export default function Home() {
 
   return (
     <>
-      <Meta title='Chat' description='chat' />
+      <Meta title='ChatGPT' description='chat' />
       {
         isLoading
           ?
           <Loading />
           :
           <>
-            {loading && <Loading />}
+            {/* {loading && <Loading />} */}
             <Main />
           </>
       }

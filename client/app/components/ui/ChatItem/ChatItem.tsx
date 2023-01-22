@@ -1,23 +1,35 @@
+import { useAppDispatch } from '@hooks/redux';
+import { useDeleteChatMutation, useUpdateChatNameMutation } from '@services/ChatService.api';
 import { useEffect, useRef, useState } from 'react';
+import { setActiveChatIndex } from 'slices/MainSlice';
 import styles from './ChatItem.module.scss';
 
 interface IProps {
     index: number,
     activeIndex: number | null,
-    title: string,
+    name: string,
     setActiveIndex: (index: number) => void,
+    chatId: string
 }
 
 const ChatItem: React.FC<IProps> = (props) => {
 
+    const dispatch = useAppDispatch()
+
+    const [deleteChat] = useDeleteChatMutation()
+    const [updateChatName] = useUpdateChatNameMutation()
+
     const inputRef = useRef<HTMLInputElement>(null)
     const editRef = useRef<SVGSVGElement>(null)
+    const deleteRef = useRef<SVGSVGElement>(null)
 
     const [editor, setEditor] = useState(false)
-    const [text, setText] = useState(props.title)
+    const [text, setText] = useState(props.name)
 
     const editorHandler = async () => {
         editRef.current?.removeEventListener('click', editorHandler)
+        deleteRef.current?.removeEventListener('click', deleteChatHandler)
+
         await setEditor(true)
         await (() => {
             if (inputRef.current) {
@@ -26,17 +38,24 @@ const ChatItem: React.FC<IProps> = (props) => {
         })()
     }
 
-    const onBlurHandler = async() => {
-        // await updateTitle() ------- update title
+    const deleteChatHandler = async () => {
+        await dispatch(setActiveChatIndex(null))
+        await deleteChat(props.chatId)
+    }
+
+    const onBlurHandler = async () => {
+        await updateChatName({chatId: props.chatId, name: text})
         await setEditor(false)
         await setTimeout(() => {
             editRef.current?.addEventListener('click', editorHandler)
+            deleteRef.current?.addEventListener('click', deleteChatHandler)
         }, 200)
     }
 
     useEffect(() => {
         setTimeout(() => {
             editRef.current?.addEventListener('click', editorHandler)
+            deleteRef.current?.addEventListener('click', deleteChatHandler)
         }, 200)
     }, [props.activeIndex])
 
@@ -75,7 +94,7 @@ const ChatItem: React.FC<IProps> = (props) => {
                 <div className={styles.btnWrapper}>
                     <button className={styles.btn} >
                         {editor ?
-                            <svg onClick={() => setText(props.title)} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <svg onClick={() => setText(props.name)} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M5 12l5 5l10 -10"></path>
                             </svg>
@@ -96,7 +115,7 @@ const ChatItem: React.FC<IProps> = (props) => {
                             </svg>
 
                             :
-                            <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <svg ref={deleteRef} stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                 <polyline points="3 6 5 6 21 6"></polyline>
                                 <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                                 <line x1="10" y1="11" x2="10" y2="17"></line>
