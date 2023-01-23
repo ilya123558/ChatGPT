@@ -22,7 +22,7 @@ const BotMessage: React.FC<IProps> = ({ message, loading }) => {
                     break
                 }
             }
-            const temp = messageSplit.splice(messageIndex, messageSplit.length - 1)
+            const temp = messageSplit.splice(messageIndex, messageSplit.length)
             setMessageArray(() => temp)
         }
     }, [message])
