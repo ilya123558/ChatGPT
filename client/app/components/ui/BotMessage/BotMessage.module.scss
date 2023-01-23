@@ -24,13 +24,16 @@
     justify-content: center;
 }
 
-.text {
+.text{
     width: 100%;
     padding-top: 5px;
+}
+
+.textItem{
+    font-family: 'Roboto-Light';
     font-size: 16px;
     opacity: 0.9;
-    font-family: 'Roboto-Light';
-}
+} 
 
 .evoluation {
     display: flex;

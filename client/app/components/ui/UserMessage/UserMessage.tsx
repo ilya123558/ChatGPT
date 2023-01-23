@@ -2,6 +2,7 @@ import { IMessage } from 'models/IChat';
 import styles from './UserMessage.module.scss';
 
 const UserMessage: React.FC<IMessage> = ({message}) => {
+
     return (
         <div className={styles.userMessage}>
             <div className={styles.wrapper}>
