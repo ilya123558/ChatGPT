@@ -1,7 +1,7 @@
 import { useAppSelector } from '@hooks/redux';
 import { useGetAllChatsQuery } from '@services/ChatService.api';
 import { IChat } from 'models/IChat';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BotMessage from '../BotMessage/BotMessage';
 import UserMessage from '../UserMessage/UserMessage';
 import styles from './ChatMessagesList.module.scss';
@@ -14,16 +14,27 @@ const ChatMessagesList: React.FC = () => {
     const [chat, setChat] = useState<IChat | null>(null)
     const { data } = useGetAllChatsQuery(null)
 
+    const myRef = useRef<HTMLDivElement | null>(null)
+
     useEffect(() => {
-        if (data && activeChatIndex !== null) {
-            setChat(() => data[activeChatIndex])
-        }
-    }, [activeChatIndex, data])
+        (async () => {
+            if (data && activeChatIndex !== null) {
+                await setChat(() => data[activeChatIndex])
+            }
+
+            await setTimeout(() => {
+                if (myRef.current)
+                    myRef.current.scrollTop = myRef.current.scrollHeight;
+            }, 200)
+        })()
+
+    }, [activeChatIndex, data, newUserMessage])
+
 
     return (
         <>
             {activeChatIndex !== null ?
-                <div className={styles.chatMessagesList}>
+                <div ref={myRef} className={styles.chatMessagesList}>
                     {chat && chat.chat.map((elem, index) => {
                         if (elem.entity === 'AI') {
                             return <BotMessage key={index} {...elem} />
@@ -37,7 +48,7 @@ const ChatMessagesList: React.FC = () => {
                         &&
                         <>
                             <UserMessage message={newUserMessage.message || ''} />
-                            <BotMessage message='' loading={true}/>
+                            <BotMessage message='' loading={true} />
                         </>
                     }
                 </div>
@@ -49,7 +60,7 @@ const ChatMessagesList: React.FC = () => {
                             < div className={styles.chatMessagesList}>
                                 <>
                                     <UserMessage message={newUserMessage.message || ''} />
-                                    <BotMessage message='' loading={true}/>
+                                    <BotMessage message='' loading={true} />
                                 </>
                             </div>
                             :

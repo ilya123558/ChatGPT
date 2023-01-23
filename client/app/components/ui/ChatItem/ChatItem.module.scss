@@ -48,7 +48,7 @@
         padding: 4px;
         background-color: inherit;
 
-        &:focus{
+        &:focus {
             outline: none;
         }
     }
@@ -102,4 +102,30 @@
             color: rgba(255, 255, 255, 1);
         }
     }
+}
+
+.textAnimation {
+    animation: TextAnimation .3s;
+    opacity: 0.8;
+}
+
+@keyframes TextAnimation {
+    50%{
+        color: #444654;
+        background: #4a4a55;
+        border-radius: 4px;
+        opacity: 0.1;
+        margin-left: 10px;
+    }
+
+    90%{
+        opacity: 0;
+    }
+
+    100%{
+        opacity: 1;
+        color: transparent;
+        background: transparent;
+    }
+
 }

@@ -25,6 +25,7 @@ const ChatItem: React.FC<IProps> = (props) => {
 
     const [editor, setEditor] = useState(false)
     const [text, setText] = useState(props.name)
+    const [animation, setAnimation] = useState(false)
 
     const editorHandler = async () => {
         editRef.current?.removeEventListener('click', editorHandler)
@@ -44,20 +45,32 @@ const ChatItem: React.FC<IProps> = (props) => {
     }
 
     const onBlurHandler = async () => {
+        editRef.current?.removeEventListener('click', editorHandler)
+        deleteRef.current?.removeEventListener('click', deleteChatHandler)
         await updateChatName({chatId: props.chatId, name: text})
+        await setAnimation(() => true)
         await setEditor(false)
         await setTimeout(() => {
             editRef.current?.addEventListener('click', editorHandler)
             deleteRef.current?.addEventListener('click', deleteChatHandler)
-        }, 200)
+        }, 600)
     }
 
     useEffect(() => {
         setTimeout(() => {
             editRef.current?.addEventListener('click', editorHandler)
             deleteRef.current?.addEventListener('click', deleteChatHandler)
-        }, 200)
-    }, [props.activeIndex])
+        }, 600)
+        setText(() => props.name)
+    }, [props.activeIndex, props.name])
+
+    useEffect(() => {
+        if (animation) {
+            setTimeout(() => {
+                setAnimation(false)
+            }, 2000)
+        }
+    }, [animation])
 
     return (
         <li
@@ -86,6 +99,10 @@ const ChatItem: React.FC<IProps> = (props) => {
                         (props.activeIndex === props.index
                             ? styles.textMessageActive
                             : '')
+                        + ' ' +
+                        (animation
+                            ? styles.textAnimation
+                            : '')
                     }>{text}</p>
                 }
 
@@ -94,7 +111,7 @@ const ChatItem: React.FC<IProps> = (props) => {
                 <div className={styles.btnWrapper}>
                     <button className={styles.btn} >
                         {editor ?
-                            <svg onClick={() => setText(props.name)} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <svg onClick={() => editorHandler()} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M5 12l5 5l10 -10"></path>
                             </svg>
