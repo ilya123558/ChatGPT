@@ -14,10 +14,12 @@
     width: 750px;
     background-color: #40414f;
     border-radius: 5px;
-    padding: 12px 0px 10px 16px;
+    padding: 14px 0px 14px 16px;
     position: relative;
     box-shadow: 0px 0px 7px rgba(#000, .3);
     z-index: 4;
+    display: flex;
+    align-items: center;
 }
 
 .textarea {
@@ -55,17 +57,19 @@
     background: none;
     border: none;
     border-radius: 5px;
-    padding: 3px 3px 0px 3px;
+    padding: 0px 5px 0px 5px;
     color: rgb(172, 172, 190);
     transition: all 0.3s;
     position: absolute;
-    bottom: 10px;
+    bottom: 8px;
     right: 10px;
     z-index: 2;
+    height: 28px;
 
     svg {
         width: 15px;
         height: 15px;
+        margin: 0px 0px -3px;
     }
 
     &:hover {
