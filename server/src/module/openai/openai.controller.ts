@@ -1,8 +1,9 @@
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 
 import { APP } from 'src/config/app.config';
+import { CreateImageDto } from './dto/create-image.dto';
 import { OpenAIService } from './openai.service';
 
 @ApiTags('openai')
@@ -10,10 +11,10 @@ import { OpenAIService } from './openai.service';
 export class OpenAIController {
   constructor(private readonly openAIService: OpenAIService) {}
 
-  @Post('create/image/:prompt')
+  @Post('create/image')
   @UseGuards(AuthGuard(APP.JWT))
-  async createImage(@Param('prompt') prompt: string): Promise<string> {
-    return await this.openAIService.createImage(prompt);
+  async createImage(@Body() createImageDto: CreateImageDto): Promise<string> {
+    return await this.openAIService.createImage(createImageDto.prompt);
   }
 
   @Get('models')
