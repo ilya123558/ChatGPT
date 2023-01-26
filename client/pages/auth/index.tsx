@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-const index = () => {
+const AuthPage = () => {
 
     const router = useRouter()
     
@@ -14,4 +14,4 @@ const index = () => {
     );
 };
 
-export default index;
+export default AuthPage;

@@ -11,6 +11,7 @@ const BotMessage: React.FC<IProps> = ({ message, loading }) => {
 
     const [evoluation, setEvoluation] = useState('')
     const [messageArray, setMessageArray] = useState<string[]>([])
+    
 
     useEffect(() => {
         if (message) {
@@ -22,8 +23,8 @@ const BotMessage: React.FC<IProps> = ({ message, loading }) => {
                     break
                 }
             }
-            const temp = messageSplit.splice(messageIndex, messageSplit.length)
-            setMessageArray(() => temp)
+            const newMessageArray = messageSplit.splice(messageIndex, messageSplit.length)
+            setMessageArray(() => newMessageArray)
         }
     }, [message])
 
@@ -57,7 +58,11 @@ const BotMessage: React.FC<IProps> = ({ message, loading }) => {
                     <div className={styles.loadingWriteMessageInner}><LoadingWriteMessage /></div>
                     :
                     <>
-                        <div className={styles.text}>{messageArray.map((elem: string, index) => <div className={styles.textItem} key={index}>{elem}<br /></div>)}</div>
+                        <div className={styles.text}>{messageArray.map((elem: string, index) => {
+                            return <div className={styles.textItem} key={index}>
+                                {elem}
+                                <br /></div>
+                        })}</div>
                         <div className={styles.evoluation}>
                             <button className={styles.btn} onClick={clickLikeHandler}>
                                 <svg className={styles.like + ' ' + (evoluation === 'like' ? styles.like__active : '')} stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="15px" width="15px" xmlns="http://www.w3.org/2000/svg">

@@ -16,7 +16,7 @@ const AuthLogin: React.FC = () => {
     const [isProvider, setIsProvider] = useState(!!provider.hasProvider());
 
     const router = useRouter()
-    data && router.push('/')
+    data && router.push('/chat')
 
     const onClickHandler = () => {
         signInFunction({ provider, signIn })

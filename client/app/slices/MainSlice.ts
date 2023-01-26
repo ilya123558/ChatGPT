@@ -10,7 +10,8 @@ interface INewUserMessage {
 interface InitialState {
     loading: boolean,
     activeChatIndex: number | null,
-    newUserMessage: INewUserMessage
+    newUserMessage: INewUserMessage,
+    isCode: boolean
 }
 
 
@@ -22,7 +23,8 @@ const initialState: InitialState = {
         loadingBotMessage: false,
         typeMessage: 'sendMessage',
         chatId: ''
-    }
+    },
+    isCode: false
 }
 
 const mainSlice = createSlice({
@@ -38,9 +40,12 @@ const mainSlice = createSlice({
         setNewMessage: (state, action: PayloadAction<INewUserMessage>) => {
             state.newUserMessage = { ...action.payload };
         },
+        setIsCode: (state, action: PayloadAction<boolean>) => {
+            state.isCode = action.payload;
+        },
     },
 });
 
-export const { setLoading, setActiveChatIndex, setNewMessage } = mainSlice.actions;
+export const { setLoading, setActiveChatIndex, setNewMessage, setIsCode } = mainSlice.actions;
 
 export default mainSlice.reducer;

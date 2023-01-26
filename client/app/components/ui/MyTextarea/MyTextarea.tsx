@@ -36,6 +36,7 @@ const MyTextarea: React.FC = () => {
 
     const postMessage = async () => {
         const message = value
+        await setHeight(() => 19)
         await setValue('')
 
         if (value.trim().length < 4) {
@@ -66,7 +67,6 @@ const MyTextarea: React.FC = () => {
             data && await dispatch(setActiveChatIndex(data.length))
         }
 
-        await setHeight(() => 19)
     }
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
