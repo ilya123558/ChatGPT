@@ -1,7 +1,8 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { OpenAIApi } from 'openai';
 
-import { configuration } from 'src/config/openai.config';
+import { configuration, OPENAIConfig } from 'src/config/openai.config';
+import { CreateImageDto } from './dto/create-image.dto';
 
 @Injectable()
 export class OpenAIService {
@@ -9,16 +10,19 @@ export class OpenAIService {
 
   constructor(private readonly logger: Logger) {}
 
-  async findAllModels(): Promise<String[]> {
-    let response;
+  async findAllModels(): Promise<string[]> {
+    let models: string[];
 
     try {
-      response = await this.OPENAI.listModels();
+      const response = await this.OPENAI.listModels();
+
+      models = response.data.data.map(model => model.id);
     } catch (error) {
+      this.logger.error(`OPENAI_MODELS_REQUEST_ERROR: ${error}`);
       throw new BadRequestException(`OPENAI_REQUEST_ERROR: ${error}`);
     }
 
-    return response.data.data.map(model => model.id);
+    return models;
   }
 
   async createCompletion(model: string, prompt: string): Promise<string> {
@@ -28,11 +32,7 @@ export class OpenAIService {
       const response = await this.OPENAI.createCompletion({
         model: model ? model : 'text-davinci-003',
         prompt: prompt,
-        temperature: 1, // Higher values means the model will take more risks.
-        max_tokens: 1800, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
-        // top_p: 1, // alternative to sampling with temperature, called nucleus sampling
-        // frequency_penalty: 0.5, // Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
-        // presence_penalty: 0, // Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+        ...OPENAIConfig,
       });
 
       completion = response.data.choices[0].text;
@@ -44,22 +44,18 @@ export class OpenAIService {
     return completion.trimStart();
   }
 
-  async createImage(prompt: string) {
-    let imageURL: string;
+  async createImage(createImageDto: CreateImageDto): Promise<string[]> {
+    let imageURLs: string[];
 
     try {
-      imageURL = (
-        await this.OPENAI.createImage({
-          prompt: prompt,
-          n: 1,
-          size: `512x512`,
-        })
-      ).data.data[0].url;
+      const response = await this.OPENAI.createImage(createImageDto);
+
+      imageURLs = response.data.data.map(data => data.url);
     } catch (error) {
       this.logger.error(`OPENAI_IMAGE_CREATION_REQUEST_ERROR: ${error}`);
       throw new BadRequestException(`OPENAI_IMAGE_CREATION_REQUEST_ERROR: ${error}`);
     }
 
-    return imageURL;
+    return imageURLs;
   }
 }
