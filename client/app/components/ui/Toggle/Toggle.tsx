@@ -4,8 +4,7 @@ import styles from './Toggle.module.scss';
 const Toggle: React.FC = () => {
     return (
         <>
-
-            <Link href="/create-image" className={styles.toggle}>
+            <Link href="/image" className={styles.toggle}>
                 Create Image
             </Link>
         </>
