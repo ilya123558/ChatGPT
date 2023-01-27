@@ -4,7 +4,9 @@ import { ApiTags } from '@nestjs/swagger';
 import { GetUser } from 'src/components/decorators/get-user.decorator';
 import { APP } from 'src/config/app.config';
 import { CryptoUtil } from 'src/utils/crypto.util';
+import { UserSerializedDto } from './dto/user-serialized.dto';
 import { IUser } from './interfaces/user.interface';
+import { UserSerializer } from './serializers/user.serializer';
 import { UserService } from './user.service';
 
 @ApiTags('user')
@@ -13,14 +15,15 @@ export class UserController {
   constructor(
     private readonly userService: UserService,
     private readonly cryptoUtil: CryptoUtil,
+    private readonly userSerializer: UserSerializer,
     private readonly logger: Logger
   ) {}
 
   @Get()
   @UseGuards(AuthGuard(APP.JWT))
-  async getAuthorizeUser(@GetUser() user: IUser): Promise<IUser> {
+  async getAuthorizeUser(@GetUser() user: IUser): Promise<UserSerializedDto> {
     if (user) {
-      return user;
+      return this.userSerializer.serialize(user);
     }
 
     throw new NotFoundException();
