@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import * as _ from 'lodash';
 
 import { UserSerializedDto } from '../dto/user-serialized.dto';
 import { IUser } from '../interfaces/user.interface';

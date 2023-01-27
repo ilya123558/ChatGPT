@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Post, Res, UseGuards, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
-import * as _ from 'lodash';
 
 import { AuthService } from './auth.service';
 import { ExtensionAuthDto } from './dto/extension-auth.dto';
