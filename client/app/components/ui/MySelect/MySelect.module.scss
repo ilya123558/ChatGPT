@@ -1,0 +1,84 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+    position: relative;
+}
+
+.title{
+    opacity: 0.7;
+    font-family: 'Roboto-Light';
+    margin-left: -10px;
+}
+
+.decorCercle {
+    position: absolute;
+    border-radius: 50%;
+    width: 14px;
+    transition: all 0.2s;
+    height: 14px;
+    background-color: rgb(14, 185, 157);
+    bottom: 30.5px;
+}
+
+.list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 13px;
+    margin-left: 20px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 80%;
+        height: 2px;
+        background-color: rgb(14, 185, 157);
+        left: 2.5%;
+    }
+}
+
+.listItem{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.item {
+    background-color: #221f2e;
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgb(14, 185, 157);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+
+    &:hover {
+        scale: 1.1;
+    }
+}
+
+.text{
+    position: absolute;
+    transition: all 0.2s;
+    bottom: -30px;
+    opacity: 0.3;
+}
+
+.itemActive {
+    background-color: #221f2e;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid rgb(14, 185, 157);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scale: 0.9;
+    position: relative;
+}

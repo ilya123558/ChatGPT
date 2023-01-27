@@ -1,0 +1,101 @@
+.wrapper {
+    user-select: none;
+    z-index: 1;
+    max-width: 900px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    animation: sTransition 10s linear infinite;
+    max-width: 750px;
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 80px;
+    background: linear-gradient(to right,
+            rgb(76, 217, 105),
+            rgb(52, 170, 220),
+            rgb(88, 86, 217),
+            rgb(255, 45, 83),
+            rgb(255, 45, 83),
+            rgb(88, 86, 217),
+            rgb(52, 170, 220),
+            rgb(76, 217, 105));
+    background-size: 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-align: center;
+    color: transparent;
+    opacity: 0.5;
+}
+
+.text {
+    margin-top: 32px;
+    max-width: 706px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 22px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.inputInner {
+    width: 100%;
+    margin-top: 50px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.input {
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    color: rgba(#00ffff, 0.9);
+    text-overflow: ellipsis;
+    background-color: transparent;
+    border: none;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::placeholder {
+        font-size: 14px;
+        letter-spacing: 3px;
+        color: cyan;
+        opacity: 0.22;
+    }
+}
+
+.underline {
+    transition: 0.5s cubic-bezier(0.680, -0.550, 0.265, 1.550);
+    margin: 0 auto;
+    display: block;
+    height: 1px;
+    background: cyan;
+    width: 100%;
+}
+
+.mySelectInner{
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 60px;
+}
+
+
+@keyframes sTransition {
+    0% {
+        background-position: 0%;
+    }
+
+    100% {
+        background-position: 400%;
+    }
+}
