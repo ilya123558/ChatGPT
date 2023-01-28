@@ -8,7 +8,7 @@ export class CreateImageDto {
   @IsString()
   prompt: string;
 
-  @ApiProperty()
+  @ApiProperty({ default: 1 })
   @IsNumber()
   n: number;
 
