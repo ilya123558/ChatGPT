@@ -18,8 +18,8 @@ export class OpenAIService {
 
       models = response.data.data.map(model => model.id);
     } catch (error) {
-      this.logger.error(`OPENAI_MODELS_REQUEST_ERROR: ${error}`);
-      throw new BadRequestException(`OPENAI_REQUEST_ERROR: ${error}`);
+      this.logger.error(`GENERATION_MODELS_REQUEST_ERROR: ${error}`);
+      throw new BadRequestException(`GENERATION_REQUEST_ERROR: ${error}`);
     }
 
     return models;
@@ -37,8 +37,8 @@ export class OpenAIService {
 
       completion = response.data.choices[0].text;
     } catch (error) {
-      this.logger.error(`OPENAI_COMPLETION_REQUEST_ERROR: ${error}`);
-      throw new BadRequestException(`OPENAI_COMPLETION_REQUEST_ERROR: ${error}`);
+      this.logger.error(`GENERATION_COMPLETION_REQUEST_ERROR: ${error}`);
+      throw new BadRequestException(`GENERATION_COMPLETION_REQUEST_ERROR: ${error}`);
     }
 
     return completion.trimStart();
@@ -52,8 +52,8 @@ export class OpenAIService {
 
       imageURLs = response.data.data.map(data => data.url);
     } catch (error) {
-      this.logger.error(`OPENAI_IMAGE_CREATION_REQUEST_ERROR: ${error}`);
-      throw new BadRequestException(`OPENAI_IMAGE_CREATION_REQUEST_ERROR: ${error}`);
+      this.logger.error(`GENERATION_IMAGE_CREATION_REQUEST_ERROR: ${error}`);
+      throw new BadRequestException(`GENERATION_IMAGE_CREATION_REQUEST_ERROR: ${error}`);
     }
 
     return imageURLs;
