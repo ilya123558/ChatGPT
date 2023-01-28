@@ -1,4 +1,5 @@
 import GenerateImageBtn from '@components/ui/buttons/GenerateImageBtn/GenerateImageBtn';
+import Carousel from '@components/ui/Carousel/Carousel';
 import MySelect from '@components/ui/MySelect/MySelect';
 import React, { useState } from 'react';
 import styles from './CreateImageContent.module.scss';
@@ -34,8 +35,9 @@ const CreateImageContent: React.FC = () => {
             <div className={styles.mySelectInner}>
                 <MySelect title='Select the number of pictures' array={['1', '2', ' 3']} />
                 <GenerateImageBtn />
-                <MySelect title='Choose the size of the pictures' array={['100/100', '200/200', '300/300']} left={-8} />
+                <MySelect title='Choose the size of the pictures' array={['256x256', '512x512', '1024x1024']} left={-10} />
             </div>
+            <Carousel />
         </div>
     );
 };
