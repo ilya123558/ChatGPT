@@ -32,6 +32,7 @@
     text-align: center;
     color: transparent;
     opacity: 0.5;
+    text-shadow: -2px -2px 0px rgba(5, 5, 5, 0.5);
 }
 
 .text {
@@ -43,6 +44,7 @@
     line-height: 22px;
     text-align: center;
     opacity: 0.8;
+    text-shadow: -1px -1px 1px rgb(240, 240, 240, 0.6);
 }
 
 .inputInner {
@@ -58,6 +60,7 @@
     padding: 10px;
     font-size: 20px;
     color: rgba($--glow-worm, 0.9);
+    text-shadow: 1px 1px 0px rgba(rgb(95, 202, 216), 0.3);
 
     text-overflow: ellipsis;
     background-color: transparent;

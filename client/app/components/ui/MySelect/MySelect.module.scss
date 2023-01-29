@@ -13,6 +13,7 @@
     opacity: 0.7;
     font-family: 'Roboto-Light';
     margin-left: -10px;
+    text-shadow: -2px -2px 2px rgba(0, 0, 0, 0.7);
 }
 
 .decorCercle {
@@ -22,7 +23,9 @@
     transition: all 0.2s;
     height: 14px;
     background-color: $--glow-worm;
-    bottom: 30px;
+    bottom: 55px;
+    box-shadow: 0 0 10px $--glow-worm, 0 0 8px $--glow-worm,
+            0 0 15px $--glow-worm, 0 0 15px $--glow-worm;
 }
 
 .list {
@@ -83,4 +86,6 @@
     justify-content: center;
     scale: 0.9;
     position: relative;
+    box-shadow: 0 0 2px $--glow-worm, 0 0 1px $--glow-worm,
+            0 0 10px $--glow-worm, 0 0 3px $--glow-worm;
 }

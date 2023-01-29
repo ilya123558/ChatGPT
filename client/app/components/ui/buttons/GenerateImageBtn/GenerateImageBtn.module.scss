@@ -1,19 +1,30 @@
 @import "@assets/styles/vars.scss";
 
-.generateImageBtn{
-    border: 3px solid $--glow-worm;
-    background-color: transparent;
-    border-radius: 5px;
-    width: 150px;
-    height: 65px;
-    color: $--glow-worm;
-    font-size: 20px;
-    font-weight: bold;
-    transition: all 0.2s;
-    margin-top: 30px;
-    cursor: pointer;
 
-    &:hover{
-        scale: 1.05;
+$--btn-color: $--glow-worm;
+$--bg-color: #000;
+
+.generateImageBtn {
+    padding: 25px 30px;
+    margin: 20px 0px;
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.5s linear;
+    letter-spacing: 4px;
+    overflow: hidden;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: 20px;
+    text-shadow: -1px -1px 1px $--btn-color;
+
+    &:hover {
+        background: $--btn-color;
+        color: rgba($--btn-color, 0.5);
+        text-shadow: -1px -1px 1px #000;
+        box-shadow: 0 0 5px $--btn-color, 0 0 2px $--btn-color,
+            0 0 20px $--btn-color, 0 0 5px $--btn-color;
     }
 }

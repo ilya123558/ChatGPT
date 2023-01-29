@@ -1,3 +1,5 @@
+@import "@assets/styles/vars.scss";
+
 .wrapper {
     width: 1210px;
     margin-top: 40px;
@@ -5,11 +7,11 @@
 }
 
 .carouselInner {
-    width: 100%;
+    width: 99.5%;
     height: 100%;
     overflow: hidden;
     position: relative;
-    padding: 0px 5px;
+    padding: 0px 2px;
 }
 
 .carousel {
@@ -17,6 +19,7 @@
     height: 100%;
     display: flex;
     transition: all 0.2s;
+    padding: 20px 0px;
 }
 
 .carouselItem {
@@ -26,6 +29,8 @@
     background-color: rgba(77, 48, 48, 0.26);
     margin: 0px 10px;
     position: relative;
+    box-shadow: 0 0 2px $--glow-worm, 0 0 1px $--glow-worm,
+            0 0 10px $--glow-worm, 0 0 3px $--glow-worm;
 
 
     &:hover {
@@ -106,17 +111,20 @@
     line-height: 20px;
     opacity: 0.8;
     filter: blur(0.4px);
+    text-shadow: -1px -1px 0px rgba(5, 5, 5, 0.8);
 }
 
 .carouselItemBtn {
     display: none;
     font-size: 14px;
     font-weight: 400;
-    color: #2b2b2b;
+    color: rgba(5, 5, 5);
     line-height: 16px;
-    background-color: #fff;
-    border: 1px solid #2b2b2b;
+    background-color: rgb(163, 189, 218);
+    border: 2px solid rgba(0, 0, 0, 0.452);
     border-radius: 10px;
-    padding: 5px 10px;
+    padding: 10px 18px;
     cursor: pointer;
+    text-shadow: 1px 1px 0px rgba(243, 242, 253, 1);
+    font-size: 16px;
 }
