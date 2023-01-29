@@ -14,9 +14,9 @@
 .title {
     animation: sTransition 10s linear infinite;
     max-width: 750px;
-    font-size: 54px;
+    font-size: 44px;
     font-weight: 600;
-    line-height: 62px;
+    line-height: 50px;
     background: linear-gradient(to right,
             rgb(76, 217, 105),
             rgb(52, 170, 220),
@@ -57,7 +57,6 @@
     width: 100%;
     padding: 10px;
     font-size: 20px;
-    // color: rgba(#00ffff, 0.9);
     color: rgba($--glow-worm, 0.9);
 
     text-overflow: ellipsis;

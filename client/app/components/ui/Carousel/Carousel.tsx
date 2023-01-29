@@ -14,7 +14,7 @@ const carouselList: { description: string, url: any }[] = [{
     url: carouselItemImg1
 },
 {
-    description: "An island in the ocean with an ancient wooden ship on it is a picturesque and mysterious setting. The island is likely to be a tropical paradise, with white sandy beaches, lush vegetation, and crystal-clear waters. The island is surrounded by the deep blue ocean, and the ship is likely to be a vessel from the past, possibly a sailing ship or a pirate ship. The ship may be partially submerged in the water and is covered with barnacles and seaweed, showing the signs of long-term exposure to the elements. The ship may also be in a state of disrepair, with missing or broken planks, and ragged sails. The island and the ship together create a sense of history and adventure, as if the island was once a hub of activity and the ship was part of it. This island can be a haven for people who love to explore and discover, who can feel the nostalgia and the beauty of nature in one spot.",
+    description: "An island in the ocean with a wooden ship on it is a picturesque and mysterious setting. The island is likely to be a tropical paradise, with white sandy beaches, lush vegetation, and crystal-clear waters. The island is surrounded by the deep blue ocean, and the ship is likely to be a vessel from the past, possibly a sailing ship or a pirate ship. The ship may be partially submerged in the water and is covered with barnacles and seaweed, showing the signs of long-term exposure to the elements. The ship may also be in a state of disrepair, with missing or broken planks, and ragged sails. The island and the ship together create a sense of history and adventure, as if the island was once a hub of activity and the ship was part of it. This island can be a haven for people who love to explore and discover, who can feel the nostalgia and the beauty of nature in one spot.",
     url: carouselItemImg2
 },
 {
@@ -26,7 +26,7 @@ const carouselList: { description: string, url: any }[] = [{
     url: carouselItemImg4
 },
 {
-    description: "A human with 10 cats on his head is an unusual and unusual sight. The human would likely be standing or sitting, with the cats perched on top of their head and possibly spilling over onto their shoulders. The cats would be various sizes and breeds, but all would likely be domestic cats.",
+    description: "A human with cats on his head is an unusual and unusual sight. The human would likely be standing or sitting, with the cats perched on top of their head and possibly spilling over onto their shoulders. The cats would be various sizes and breeds, but all would likely be domestic cats.",
     url: carouselItemImg5
 },
 {
