@@ -1,0 +1,65 @@
+.downloadBtn {
+    position: relative;
+    border: none;
+    border-radius: 40px;
+    width: 160px;
+    height: 50px;
+    cursor: pointer;
+    transition: color 0.3s ease-in;
+    margin-top: 80px;
+
+    &:active {
+        scale: 0.9;
+    }
+}
+
+.textListWrapper {
+    overflow: hidden;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    height: 20px;
+    top: 10px;
+    width: 90px;
+    height: 30px;
+}
+
+.textList {
+    transition: all 0.3s ease-out;
+    position: absolute;
+}
+
+.textItem {
+    font-size: 18px;
+}
+
+.svgListWrapper {
+    overflow: hidden;
+    position: absolute;
+    left: 12px;
+    height: 20px;
+    top: 8px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.svgList {
+    transition: all 0.3s ease-out;
+    position: absolute;
+}
+
+.svgItem {
+    margin-top: -3px;
+    margin-left: -3px;
+    transition: all 0.3s ease-out;
+
+    svg {
+        width: 41px;
+        height: 41px;
+    }
+}
+
+.arrow {
+    transform: rotate(-90deg);
+}

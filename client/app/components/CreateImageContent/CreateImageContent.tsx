@@ -1,13 +1,25 @@
 import GenerateImageBtn from '@components/ui/buttons/GenerateImageBtn/GenerateImageBtn';
 import Carousel from '@components/ui/Carousel/Carousel';
 import MySelect from '@components/ui/MySelect/MySelect';
-import React, { useState } from 'react';
+import ResponseImageContent from '@components/ui/ResponseImageContent/ResponseImageContent';
+import ResponseImageLoading from '@components/ui/ResponseImageLoading/ResponseImageLoading';
+import { useCreateImagesMutation } from '@services/ImageService.api';
+import React, { useEffect, useState } from 'react';
 import styles from './CreateImageContent.module.scss';
+
+const arrayCountPictures = ['1', '2', '3']
+const arraySizePicturesIndex = ['256x256', '512x512', '1024x1024']
 
 const CreateImageContent: React.FC = () => {
 
+    const [createImages, { data, isLoading }] = useCreateImagesMutation()
+
     const [counter, setCounter] = useState(200);
+    const [toggle, setToggle] = useState(false)
+
     const [value, setValue] = useState('')
+    const [countPicturesIndex, setCountPicturesIndex] = useState(0)
+    const [sizePicturesIndex, setSizePicturesIndex] = useState(0)
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(() => event.target.value)
@@ -17,8 +29,31 @@ const CreateImageContent: React.FC = () => {
         }
     }
 
+    const onClickHandler = async () => {
+        await createImages({
+            prompt: value,
+            n: Number(arrayCountPictures[countPicturesIndex]),
+            size: arraySizePicturesIndex[sizePicturesIndex]
+        })
+
+        setValue('')
+        setCountPicturesIndex(0)
+        setSizePicturesIndex(0)
+    }
+
+    useEffect(() => {
+        if (data && !isLoading) {
+            setToggle(true)
+        }
+    }, [data, isLoading])
+
+
     return (
         <div className={styles.wrapper}>
+            {isLoading && <ResponseImageLoading />}
+            {toggle && !isLoading &&
+                <ResponseImageContent data={data} />
+            }
             <h1 className={styles.title}>Text to Image with <br /> AI Image Generator</h1>
             <p className={styles.text}>
                 Convert words to images in seconds with Fotor's free AI image generator. Input the text prompts and transfer your imagination into arts now.
@@ -33,9 +68,20 @@ const CreateImageContent: React.FC = () => {
                 <span className={styles.underline} style={{ width: `${counter}%` }}></span>
             </div>
             <div className={styles.mySelectInner}>
-                <MySelect title='Select the number of pictures' array={['1', '2', ' 3']} />
-                <GenerateImageBtn />
-                <MySelect title='Choose the size of the pictures' array={['256x256', '512x512', '1024x1024']} left={-10} />
+                <MySelect
+                    title='Select the number of pictures'
+                    array={arrayCountPictures}
+                    activeIndex={countPicturesIndex}
+                    setActiveIndex={setCountPicturesIndex}
+                />
+                <GenerateImageBtn onClick={onClickHandler} />
+                <MySelect
+                    title='Choose the size of the pictures'
+                    array={arraySizePicturesIndex}
+                    left={-10}
+                    activeIndex={sizePicturesIndex}
+                    setActiveIndex={setSizePicturesIndex}
+                />
             </div>
             <Carousel />
         </div>

@@ -1,8 +1,8 @@
 import styles from './GenerateImageBtn.module.scss';
 
-const GenerateImageBtn = () => {
+const GenerateImageBtn: React.FC<{onClick: () => void}> = ({onClick}) => {
     return (
-        <button className={styles.generateImageBtn}>
+        <button className={styles.generateImageBtn} onClick={onClick}>
             Generate
         </button>
     );

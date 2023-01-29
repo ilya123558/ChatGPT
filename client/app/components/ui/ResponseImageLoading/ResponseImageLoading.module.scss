@@ -1,0 +1,28 @@
+.wrapper {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+}
+
+.loading {
+    animation: spinner 4s infinite;
+    opacity: 0.6;
+}
+
+@keyframes spinner {
+    40% {
+        opacity: 1;
+        scale: 1.3;
+    }
+
+    100% {
+        opacity: 0.6;
+        scale: 1;
+        transform: rotate(360deg);
+    }
+}

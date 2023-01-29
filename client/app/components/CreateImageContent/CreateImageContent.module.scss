@@ -59,7 +59,7 @@
     font-size: 20px;
     // color: rgba(#00ffff, 0.9);
     color: rgba($--glow-worm, 0.9);
-    
+
     text-overflow: ellipsis;
     background-color: transparent;
     border: none;
@@ -85,7 +85,7 @@
     width: 100%;
 }
 
-.mySelectInner{
+.mySelectInner {
     margin-top: 30px;
     width: 100%;
     display: flex;
