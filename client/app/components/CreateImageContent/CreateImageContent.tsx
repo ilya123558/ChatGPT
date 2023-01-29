@@ -12,7 +12,7 @@ const arraySizePicturesIndex = ['256x256', '512x512', '1024x1024']
 
 const CreateImageContent: React.FC = () => {
 
-    const [createImages, { data, isLoading }] = useCreateImagesMutation()
+    const [createImages, { data, isLoading, error }] = useCreateImagesMutation()
 
     const [counter, setCounter] = useState(200);
     const [toggle, setToggle] = useState(false)
@@ -51,18 +51,18 @@ const CreateImageContent: React.FC = () => {
     return (
         <div className={styles.wrapper}>
             {isLoading && <ResponseImageLoading />}
-            {toggle && !isLoading &&
-                <ResponseImageContent data={data} />
+            {toggle && !isLoading && !error &&
+                <ResponseImageContent data={data} setToggle={setToggle} />
             }
-            <h1 className={styles.title}>Text to Image with <br /> AI Image Generator</h1>
+            <h1 className={styles.title}>Creating Illusions of Reality:  <br /> The Power of AI image Generation</h1>
             <p className={styles.text}>
-                Convert words to images in seconds with Fotor's free AI image generator. Input the text prompts and transfer your imagination into arts now.
+                Transforming words into art in seconds with AI Image generator.
             </p>
             <div className={styles.inputInner}>
                 <input
                     className={styles.input}
                     onChange={onChangeHandler}
-                    placeholder="Send tags"
+                    placeholder="Describe what you want to see with phrases and let AI do the rest"
                     value={value}
                 />
                 <span className={styles.underline} style={{ width: `${counter}%` }}></span>
