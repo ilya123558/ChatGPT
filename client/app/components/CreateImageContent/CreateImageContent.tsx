@@ -25,7 +25,7 @@ const CreateImageContent: React.FC = () => {
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(() => event.target.value)
-        setCounter(event.target.value.length * 4);
+        setCounter(event.target.value.length * 3);
         if (event.target.value.length === 0) {
             setCounter(100);
         }

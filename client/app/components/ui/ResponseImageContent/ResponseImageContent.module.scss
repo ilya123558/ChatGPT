@@ -1,3 +1,5 @@
+@import '@assets/styles/vars.scss';
+
 .responseImageContent {
     position: absolute;
     left: 0;
@@ -22,6 +24,7 @@
     width: 380px;
     margin: 1rem;
     cursor: pointer;
+
 }
 
 .container {
@@ -53,6 +56,8 @@
     border-radius: 10px;
     color: #fff;
     font-size: 1.5rem;
+    box-shadow: 0 0 2px $--glow-worm, 0 0 1px $--glow-worm,
+    0 0 14px $--glow-worm, 0 0 3px $--glow-worm;
 }
 
 .back:after {
