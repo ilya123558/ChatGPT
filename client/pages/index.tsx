@@ -1,3 +1,4 @@
+import styles from '@assets/styles/Home.module.scss'
 import Loading from '@components/ui/Loading/Loading';
 import { useAppSelector } from '@hooks/redux';
 import { useGetUserQuery } from '@services/UserService.api';
@@ -20,8 +21,17 @@ export default function Home() {
   return (
     <>
       {(isLoading || loading) && <Loading />}
-      <Link href={'/chat'}><button style={{ padding: '10px 15px', border: '1px solid #000', cursor: 'pointer', background: 'none', borderRadius: '5px' }}>chat</button></Link>
-      <Link href={'/image'}><button style={{ padding: '10px 15px', border: '1px solid #000', margin: '0px 20px', cursor: 'pointer', background: 'none', borderRadius: '5px' }}>generation image</button></Link>
+      <section className={styles.home}>
+        <div className={styles.grid}>
+          <div className={styles.gridItem1}> hi</div>
+          <div className={styles.gridItem2}></div>
+          <div className={styles.gridItem3}></div>
+          <div className={styles.gridItem4}></div>
+        </div>
+      </section>
     </>
   )
 }
+
+{/* <Link href={'/chat'}><button className={styles.homeBtn} >chat</button></Link>
+<Link href={'/image'}><button className={styles.homeBtn}>generation image</button></Link> */}

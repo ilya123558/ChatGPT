@@ -9,7 +9,7 @@ const MyTextarea: React.FC = () => {
     const dispatch = useAppDispatch()
     const activeChatIndex = useAppSelector(state => state.state.activeChatIndex)
     
-    const [sendMessage, { isLoading }] = useSendMessageOrCreateChatMutation()
+    const [sendMessage, { isLoading, error }] = useSendMessageOrCreateChatMutation()
     const { data } = useGetAllChatsQuery(null)
 
     const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -29,10 +29,6 @@ const MyTextarea: React.FC = () => {
 
     }, [textareaRef.current?.scrollHeight])
 
-
-    useEffect(() => {
-        dispatch(setLoading(isLoading))
-    }, [isLoading])
 
     const postMessage = async () => {
         const message = value

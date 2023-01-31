@@ -25,15 +25,8 @@ export default function ChatPage() {
   return (
     <>
       <Meta title='ChatGPT' description='chat' />
-      {
-        isLoading || loading
-          ?
-          <Loading />
-          :
-          <>
-            <Main />
-          </>
-      }
+      {(isLoading || loading) && <Loading />}
+      <Main />
     </>
   )
 }
