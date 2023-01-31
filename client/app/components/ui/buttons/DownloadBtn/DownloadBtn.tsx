@@ -1,15 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './DownloadBtn.module.scss';
 
 interface IProps {
-    urls: string[],
-    isDownload: boolean ,
-    setIsDownload: (isDownload: boolean) => void
+    url: string,
 }
 
-const DownloadBtn: React.FC<IProps> = ({ urls, setIsDownload, isDownload }) => {
+const DownloadBtn: React.FC<IProps> = ({ url }) => {
 
     const [isHover, setIsHover] = useState(false)
+    const [isDownload, setIsDownload] = useState(false)
 
     const onClickHandler = () => {
         setIsDownload(!isDownload)
@@ -25,26 +24,32 @@ const DownloadBtn: React.FC<IProps> = ({ urls, setIsDownload, isDownload }) => {
     }
 
     const handleClick = () => {
-        for (let index = 0; index < urls.length; index++) {
-            const link = document.createElement('a');
-            link.href = urls[index];
-            link.target = '_blank'
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
+        const link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank'
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     };
+
+    useEffect(() => {
+        if (isDownload) {
+            setTimeout(() => {
+                setIsDownload(prev => !prev)
+            }, 2000)
+        }
+    }, [isDownload])
 
     return (
         <button
             className={styles.downloadBtn}
             onClick={onClickHandler}
-            style={{ backgroundColor: isDownload ? '#4D31F3' : '#2AC06A' }}
+            style={{ backgroundColor: isDownload ? '#2AC06A' : '#4D31F3' }}
             onMouseEnter={onHover}
             onMouseLeave={onHoverLeave}
         >
             <div className={styles.svgListWrapper}>
-                <ul className={styles.svgList} style={{ transform: `translateY(${isHover ? 0 : (!isDownload ? 0 : -49)}px)` }}>
+                <ul className={styles.svgList} style={{ transform: `translateY(${isHover ? 0 : (!isDownload ? -49 : 0)}px)` }}>
                     <li className={styles.svgItem}>
                         <svg style={{ color: "white" }} viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
                             <path fill="white" d="M512 64a448 448 0 1 1 0 896 448 448 0 0 1 0-896zm-55.808 536.384-99.52-99.584a38.4 38.4 0 1 0-54.336 54.336l126.72 126.72a38.272 38.272 0 0 0 54.336 0l262.4-262.464a38.4 38.4 0 1 0-54.272-54.336L456.192 600.384z"></path>
@@ -59,7 +64,7 @@ const DownloadBtn: React.FC<IProps> = ({ urls, setIsDownload, isDownload }) => {
                 </ul>
             </div>
             <div className={styles.textListWrapper}>
-                <ul className={styles.textList} style={{ transform: `translateY(${isDownload ? 0 : -30}px)` }}>
+                <ul className={styles.textList} style={{ transform: `translateY(${isDownload ? -30 : 0}px)` }}>
                     <li className={styles.textItem}>
                         Download
                     </li>

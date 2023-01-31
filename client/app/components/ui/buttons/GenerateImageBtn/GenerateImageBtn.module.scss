@@ -6,8 +6,7 @@ $--bg-color: #000;
 
 .generateImageBtn {
     padding: 25px 30px;
-    margin: 20px 0px;
-    color: rgba(0, 0, 0, 0.5);
+    margin: 10px 0px;
     text-decoration: none;
     text-transform: uppercase;
     transition: all 0.5s linear;
@@ -18,12 +17,14 @@ $--bg-color: #000;
     cursor: pointer;
     background-color: transparent;
     font-size: 20px;
-    text-shadow: -1px -1px 1px $--btn-color;
+    color: rgba($--btn-color, 1);
+    // text-shadow: -1px -1px 1px $--btn-color;
 
     &:hover {
         background: $--btn-color;
-        color: rgba($--btn-color, 0.5);
-        text-shadow: -1px -1px 1px #000;
+        color: rgba(255, 255, 255, 1);
+
+        // text-shadow: -1px -1px 1px #000;
         box-shadow: 0 0 5px $--btn-color, 0 0 2px $--btn-color,
             0 0 20px $--btn-color, 0 0 5px $--btn-color;
     }

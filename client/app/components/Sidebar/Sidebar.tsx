@@ -5,6 +5,7 @@ import LogoutBtn from '@components/ui/buttons/LogoutBtn/LogoutBtn';
 import styles from './Sidebar.module.scss';
 import { useAppDispatch } from '@hooks/redux';
 import { setActiveChatIndex } from 'slices/MainSlice';
+import BackHomeBtnChatPage from '@components/ui/buttons/BackHomeBtnChatPage/BackHomeBtnChatPage';
 
 const Sidebar: React.FC = () => {
 
@@ -23,9 +24,9 @@ const Sidebar: React.FC = () => {
                 </div>
                 <div className={styles.buttonsInner}>
                     <DeleteChatList />
+                    <BackHomeBtnChatPage />
                     <LogoutBtn />
                 </div>
-
             </div>
         </section>
     );

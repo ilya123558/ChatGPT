@@ -73,7 +73,7 @@ const Carousel: React.FC = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.carouselInner}>
-                <ul className={styles.carousel} style={{ transform: `translate(${-400 * activeIndex}px)` }}>
+                <ul className={styles.carousel} style={{ transform: `translate(${-406 * activeIndex}px)` }}>
                     {
                         carouselList.map((elem, index) => (
                             <li

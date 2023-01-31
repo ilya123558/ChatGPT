@@ -26,12 +26,11 @@ export default function ChatPage() {
     <>
       <Meta title='ChatGPT' description='chat' />
       {
-        isLoading
+        isLoading || loading
           ?
           <Loading />
           :
           <>
-            {/* {loading && <Loading />} */}
             <Main />
           </>
       }

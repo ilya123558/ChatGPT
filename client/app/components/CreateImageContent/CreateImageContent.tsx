@@ -2,33 +2,32 @@ import GenerateImageBtn from '@components/ui/buttons/GenerateImageBtn/GenerateIm
 import Carousel from '@components/ui/Carousel/Carousel';
 import Error from '@components/ui/Error/Error';
 import MySelect from '@components/ui/MySelect/MySelect';
-import ResponseImageContent from '@components/ui/ResponseImageContent/ResponseImageContent';
-import ResponseImageLoading from '@components/ui/ResponseImageLoading/ResponseImageLoading';
+import GenerateImages from '@components/ui/GenerateImages/GenerateImages';
 import { useCreateImagesMutation } from '@services/ImageService.api';
 import React, { useEffect, useState } from 'react';
 import styles from './CreateImageContent.module.scss';
+import { useAppDispatch, useAppSelector } from '@hooks/redux';
+import { setLoading } from 'slices/MainSlice';
 
 const arrayCountPictures = ['1', '2', '3']
 const arraySizePicturesIndex = ['256x256', '512x512', '1024x1024']
 
 const CreateImageContent: React.FC = () => {
 
+    const dispatch = useAppDispatch()
+    const loading = useAppSelector(state => state.state.loading)
+
     const [createImages, { data, isLoading, error }] = useCreateImagesMutation()
 
-    const [counter, setCounter] = useState(200);
     const [toggle, setToggle] = useState(false)
-
     const [value, setValue] = useState('')
     const [countPicturesIndex, setCountPicturesIndex] = useState(0)
     const [sizePicturesIndex, setSizePicturesIndex] = useState(0)
     const [isError, setIsError] = useState(false)
 
-    const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setValue(() => event.target.value)
-        setCounter(event.target.value.length * 3);
-        if (event.target.value.length === 0) {
-            setCounter(100);
-        }
+        console.log(event.target)
     }
 
     const onClickHandler = async () => {
@@ -37,16 +36,13 @@ const CreateImageContent: React.FC = () => {
             n: Number(arrayCountPictures[countPicturesIndex]),
             size: arraySizePicturesIndex[sizePicturesIndex]
         })
-
-        setValue('')
-        setCountPicturesIndex(0)
-        setSizePicturesIndex(0)
     }
 
     useEffect(() => {
         if (data && !isLoading) {
             setToggle(true)
         }
+        dispatch(setLoading(isLoading))
     }, [data, isLoading])
 
     useEffect(() => {
@@ -61,25 +57,24 @@ const CreateImageContent: React.FC = () => {
 
     return (
         <div className={styles.wrapper}>
-            {isLoading && <ResponseImageLoading />}
-            {toggle && !isLoading && !error && <ResponseImageContent data={data} setToggle={setToggle} />}
+            {toggle && !isLoading && !error && <GenerateImages data={data} setToggle={setToggle} />}
             {isError && <Error />}
             <h1 className={styles.title}>Creating Illusions of Reality:  <br /> The Power of AI image Generation</h1>
             <p className={styles.text}>
                 Transforming words into art in seconds with AI Image generator.
             </p>
             <div className={styles.inputInner}>
-                <input
+                <textarea
                     className={styles.input}
                     onChange={onChangeHandler}
                     placeholder="Describe what you want to see with phrases and let AI do the rest"
                     value={value}
                 />
-                <span className={styles.underline} style={{ width: `${counter}%` }}></span>
+                <span className={styles.underline} style={{ width: `100%` }}></span>
             </div>
             <div className={styles.mySelectInner}>
                 <MySelect
-                    title='Select the number of pictures'
+                    title='Select the number of the pictures'
                     array={arrayCountPictures}
                     activeIndex={countPicturesIndex}
                     setActiveIndex={setCountPicturesIndex}

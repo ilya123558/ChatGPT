@@ -10,13 +10,13 @@ import { useGetUserQuery } from '@services/UserService.api';
 const AuthLogin: React.FC = () => {
 
     const provider = new ProviderRpcClient();
-    
+
     const { data } = useGetUserQuery(null)
     const [signIn, { data: singInData, isLoading }] = useSingInMutation();
-    const [isProvider, setIsProvider] = useState(!!provider.hasProvider());
+    const [isProvider, setIsProvider] = useState(true);
 
     const router = useRouter()
-    data && router.push('/chat')
+    data && router.push('/')
 
     const onClickHandler = () => {
         signInFunction({ provider, signIn })
@@ -25,6 +25,10 @@ const AuthLogin: React.FC = () => {
     useEffect(() => {
         singInData && router.push('/')
     }, [singInData])
+
+    useEffect(() => {
+        provider.hasProvider().then((data) => setIsProvider(data))
+    }, [provider])
 
     return (
         <div className={styles.wrapper}>

@@ -32,7 +32,7 @@
     text-align: center;
     color: transparent;
     opacity: 0.5;
-    text-shadow: -2px -2px 0px rgba(5, 5, 5, 0.5);
+    // text-shadow: -2px -2px 0px rgba(5, 5, 5, 0.5);
 }
 
 .text {
@@ -61,10 +61,11 @@
     font-size: 20px;
     color: rgba($--glow-worm, 0.9);
     text-shadow: 1px 1px 0px rgba(rgb(95, 202, 216), 0.3);
-
+    resize: none;
     text-overflow: ellipsis;
-    background-color: transparent;
-    border: none;
+    background-color: rgba($--glow-worm, 0.05);
+    border: 1px solid rgba($--glow-worm, 0.9);
+    border-radius: 5px;
 
     &:focus {
         outline: none;
@@ -76,16 +77,21 @@
         color: $--glow-worm;
         opacity: 0.22;
     }
+
+    &::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba($--glow-worm, 0.3);
+        border-radius: 10px;
+
+        &:hover {
+            background-color: rgba($--glow-worm, 0.8);
+        }
+    }
 }
 
-.underline {
-    transition: 0.5s cubic-bezier(0.680, -0.550, 0.265, 1.550);
-    margin: 0 auto;
-    display: block;
-    height: 1px;
-    background: $--glow-worm;
-    width: 100%;
-}
 
 .mySelectInner {
     margin-top: 30px;

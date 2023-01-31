@@ -1,0 +1,21 @@
+@import '@assets/styles/vars.scss';
+
+.wrapper {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(#000000, 0.8);
+    z-index: 4;
+    flex-direction: column;
+}
+
+.cols {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

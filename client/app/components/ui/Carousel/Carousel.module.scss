@@ -1,17 +1,17 @@
 @import "@assets/styles/vars.scss";
 
 .wrapper {
-    width: 1210px;
+    width: 1216px;
     margin-top: 40px;
-
 }
 
 .carouselInner {
-    width: 99.5%;
+    width: 100%;
     height: 100%;
     overflow: hidden;
     position: relative;
-    padding: 0px 2px;
+    padding: 0px 0px;
+    border-radius: 10px;
 }
 
 .carousel {
@@ -26,8 +26,11 @@
     border-radius: 10px;
     width: 380px;
     height: 380px;
-    background-color: rgba(77, 48, 48, 0.26);
-    margin: 0px 10px;
+    background: #cedce7;
+    background: -webkit-linear-gradient(45deg, #cedce7 0%, #596a72 100%);
+    background: -o-linear-gradient(45deg, #cedce7 0%, #596a72 100%);
+    background: linear-gradient(45deg, #cedce7 0%, #596a72 100%);
+    margin: 0px 13px;
     position: relative;
     box-shadow: 0 0 2px $--glow-worm, 0 0 1px $--glow-worm,
             0 0 10px $--glow-worm, 0 0 3px $--glow-worm;
@@ -100,7 +103,7 @@
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     flex-direction: column;
     padding-bottom: 15px;
