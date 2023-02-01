@@ -1,7 +1,7 @@
 import { useAppDispatch } from '@hooks/redux';
 import { useDeleteChatMutation, useUpdateChatNameMutation } from '@services/ChatService.api';
 import { useEffect, useRef, useState } from 'react';
-import { setActiveChatIndex } from 'slices/MainSlice';
+import { setActiveChatIndex, setTitleInTag } from 'slices/MainSlice';
 import styles from './ChatItem.module.scss';
 
 interface IProps {
@@ -47,9 +47,10 @@ const ChatItem: React.FC<IProps> = (props) => {
     const onBlurHandler = async () => {
         editRef.current?.removeEventListener('click', editorHandler)
         deleteRef.current?.removeEventListener('click', deleteChatHandler)
-        await updateChatName({chatId: props.chatId, name: text})
+        await updateChatName({ chatId: props.chatId, name: text })
         await setAnimation(() => true)
         await setEditor(false)
+        await dispatch(setTitleInTag(text))
         await setTimeout(() => {
             editRef.current?.addEventListener('click', editorHandler)
             deleteRef.current?.addEventListener('click', deleteChatHandler)

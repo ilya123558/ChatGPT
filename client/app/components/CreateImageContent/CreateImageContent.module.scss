@@ -52,20 +52,23 @@
     margin-top: 30px;
     text-align: center;
     overflow: hidden;
+    padding: 10px 0px 0px;
+    background-color: rgba($--glow-worm, 0.05);
+    border: 1px solid rgba($--glow-worm, 0.9);
+    border-radius: 5px;
+
 }
 
 .input {
+    background-color: transparent;
+    border: none;
     text-align: center;
     width: 100%;
-    padding: 10px;
     font-size: 20px;
     color: rgba($--glow-worm, 0.9);
     text-shadow: 1px 1px 0px rgba(rgb(95, 202, 216), 0.3);
     resize: none;
     text-overflow: ellipsis;
-    background-color: rgba($--glow-worm, 0.05);
-    border: 1px solid rgba($--glow-worm, 0.9);
-    border-radius: 5px;
 
     &:focus {
         outline: none;

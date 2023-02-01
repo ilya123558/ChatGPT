@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { useGetAllChatsQuery } from '@services/ChatService.api';
 import { useEffect, useState } from 'react';
-import { setActiveChatIndex, setLoading } from 'slices/MainSlice';
+import { setActiveChatIndex, setLoading, setTitleInTag } from 'slices/MainSlice';
 import ChatItem from '../ChatItem/ChatItem';
 import styles from './ChatList.module.scss';
 
@@ -23,15 +23,31 @@ const ChatList: React.FC = () => {
         dispatch(setLoading(false))
     }, [isLoading])
 
+
     useEffect(() => {
         dispatch(setActiveChatIndex(activeIndex))
     }, [activeIndex])
 
+
     useEffect(() => {
-        if(activeIndex !== activeChatIndex) {
-            setActiveIndex(() => activeChatIndex)
+        if (activeIndex !== activeChatIndex) {
+            setActiveIndexHandler(activeChatIndex)
         }
-    }, [activeChatIndex])
+    }, [activeChatIndex, isLoading, chatList])
+
+
+    const setActiveIndexHandler = (index: number | null) => {
+        setActiveIndex(() => index)
+
+        if (!isLoading) {
+            if (chatList && index !== null && chatList[index] && chatList[index].name) {
+                dispatch(setTitleInTag(chatList[index].name))
+            }
+            else {
+                dispatch(setTitleInTag('ChatGPT'))
+            }
+        }
+    }
 
     return (
         <>
@@ -44,7 +60,7 @@ const ChatList: React.FC = () => {
                             name={elem.name}
                             index={index}
                             activeIndex={activeIndex}
-                            setActiveIndex={setActiveIndex}
+                            setActiveIndex={setActiveIndexHandler}
                             chatId={elem._id}
                         />
                     ))}

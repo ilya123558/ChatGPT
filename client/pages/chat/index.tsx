@@ -11,6 +11,7 @@ import { useAppSelector } from '@hooks/redux';
 export default function ChatPage() {
 
   const loading = useAppSelector(state => state.state.loading)
+  const titleInTag = useAppSelector(state => state.state.titleInTag)
 
   const router = useRouter();
   const { isLoading, error } = useGetUserQuery(null)
@@ -19,12 +20,11 @@ export default function ChatPage() {
     if (error) {
       router.push('/auth/login')
     }
-
   }, [error])
 
   return (
     <>
-      <Meta title='ChatGPT' description='chat' />
+      <Meta title={titleInTag || 'ChatGPT'} description='chat' />
       {(isLoading || loading) && <Loading />}
       <Main />
     </>

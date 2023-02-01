@@ -11,7 +11,8 @@ interface InitialState {
     loading: boolean,
     activeChatIndex: number | null,
     newUserMessage: INewUserMessage,
-    isCode: boolean
+    isCode: boolean,
+    titleInTag: string
 }
 
 
@@ -24,7 +25,8 @@ const initialState: InitialState = {
         typeMessage: 'sendMessage',
         chatId: ''
     },
-    isCode: false
+    isCode: false,
+    titleInTag: 'ChatGPT'
 }
 
 const mainSlice = createSlice({
@@ -43,9 +45,12 @@ const mainSlice = createSlice({
         setIsCode: (state, action: PayloadAction<boolean>) => {
             state.isCode = action.payload;
         },
+        setTitleInTag: (state, action: PayloadAction<string>) => {
+            state.titleInTag = action.payload;
+        },
     },
 });
 
-export const { setLoading, setActiveChatIndex, setNewMessage, setIsCode } = mainSlice.actions;
+export const { setLoading, setActiveChatIndex, setNewMessage, setIsCode, setTitleInTag } = mainSlice.actions;
 
 export default mainSlice.reducer;

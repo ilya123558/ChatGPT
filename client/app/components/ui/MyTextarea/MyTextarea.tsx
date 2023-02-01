@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@hooks/redux';
 import { useGetAllChatsQuery, useSendMessageOrCreateChatMutation } from '@services/ChatService.api';
 import React, { useEffect, useRef, useState } from 'react';
-import { setActiveChatIndex, setLoading, setNewMessage } from 'slices/MainSlice';
+import { setActiveChatIndex, setLoading, setNewMessage, setTitleInTag } from 'slices/MainSlice';
 import styles from './MyTextarea.module.scss';
 
 const MyTextarea: React.FC = () => {
@@ -48,6 +48,7 @@ const MyTextarea: React.FC = () => {
             }))
             await sendMessage({ message, chatName: data[activeChatIndex].name, chatId: data[activeChatIndex]._id })
             await dispatch(setNewMessage({ loadingBotMessage: false }))
+            await dispatch(setTitleInTag (data[activeChatIndex].name))
         }
         else {
             await dispatch(setNewMessage({
@@ -61,6 +62,7 @@ const MyTextarea: React.FC = () => {
             })
             await dispatch(setNewMessage({ loadingBotMessage: false }))
             data && await dispatch(setActiveChatIndex(data.length))
+            await dispatch(setTitleInTag(`${message.split(' ').slice(0, 6).join(' ')} ${message.split(' ').length > 6 ? '...' : ''}`))
         }
 
     }
