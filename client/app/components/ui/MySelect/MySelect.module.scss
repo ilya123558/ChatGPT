@@ -9,23 +9,24 @@
     position: relative;
 }
 
-.title{
+.title {
     opacity: 0.7;
     font-family: 'Roboto-Light';
-    margin-left: -10px;
-    text-shadow: -2px -2px 2px rgba(0, 0, 0, 0.7);
+    margin-left: -0.625em;
+    text-shadow: -0.125em -0.125em 0.125em rgba(0, 0, 0, 0.7);
+    font-size: 11.5px;
 }
 
 .decorCercle {
     position: absolute;
     border-radius: 50%;
-    width: 14px;
+    width: 0.875em;
     transition: all 0.2s;
-    height: 14px;
+    height: 0.875em;
     background-color: $--glow-worm;
-    bottom: 35px;
-    box-shadow: 0 0 10px $--glow-worm, 0 0 8px $--glow-worm,
-            0 0 15px $--glow-worm, 0 0 15px $--glow-worm;
+    bottom: 2.1875em;
+    box-shadow: 0 0 0.625em $--glow-worm, 0 0 0.5em $--glow-worm,
+        0 0 1em $--glow-worm, 0 0 1em $--glow-worm;
 }
 
 .list {
@@ -33,20 +34,20 @@
     display: flex;
     align-items: center;
     position: relative;
-    margin-top: 13px;
-    margin-left: 20px;
+    margin-top: 0.8125em;
+    margin-left: 1.25em;
 
     &::before {
         content: '';
         position: absolute;
         width: 80%;
-        height: 2px;
+        height: 0.125em;
         background-color: $--glow-worm;
         left: 2.5%;
     }
 }
 
-.listItem{
+.listItem {
     display: flex;
     flex-direction: column;
     position: relative;
@@ -54,9 +55,9 @@
 
 .item {
     background-color: #221f2e;
-    width: 30px;
-    height: 30px;
-    border: 3px solid $--glow-worm;
+    width: 1.875em;
+    height: 1.875em;
+    border: 0.1875em solid $--glow-worm;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.2s;
@@ -67,25 +68,86 @@
     }
 }
 
-.text{
+.text {
     position: absolute;
     transition: all 0.2s;
-    bottom: -30px;
+    bottom: -2.475em;
     opacity: 0.3;
+    font-size: 13px;
 }
 
 .itemActive {
     background-color: #221f2e;
-    width: 30px;
-    height: 30px;
+    width: 1.875em;
+    height: 1.875em;
     border-radius: 50%;
-    border: 3px solid $--glow-worm;
+    border: 0.1875em solid $--glow-worm;
     transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
     scale: 0.9;
     position: relative;
-    box-shadow: 0 0 2px $--glow-worm, 0 0 1px $--glow-worm,
-            0 0 10px $--glow-worm, 0 0 3px $--glow-worm;
+    box-shadow: 0 0 0.125em $--glow-worm, 0 0 0.0625em $--glow-worm,
+        0 0 0.625em $--glow-worm, 0 0 0.1875em $--glow-worm;
+}
+
+
+@media (max-height: 850px) {
+    .wrapper{
+        font-size: 13px;
+    }
+
+    .title{
+        font-size: 10px;
+    }
+
+    .text{
+        font-size: 11.5px;
+    }
+}
+
+@media (max-width: 1050px) {
+
+    .wrapper{
+        font-size: 11px;
+    }
+
+    .title{
+        font-size: 8px;
+    }
+
+    .text{
+        font-size: 9.5px;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .wrapper{
+        font-size: 8px;
+        margin-bottom: 2em;
+    }
+
+    .title{
+        font-size: 6px;
+    }
+
+    .text{
+        font-size: 6.9px;
+        bottom: -3.475em;
+    }
+
+    .decorCercle {
+        bottom: 0.5em;
+        box-shadow: 0 0 0.625em $--glow-worm, 0 0 0.5em $--glow-worm,
+            0 0 1em $--glow-worm, 0 0 1em $--glow-worm;
+    }
+
+    .list {
+        &::before {
+            left: 0.5%;
+        }
+    }
 }

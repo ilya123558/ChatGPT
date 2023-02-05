@@ -4,9 +4,9 @@ import Error from '@components/ui/Error/Error';
 import MySelect from '@components/ui/MySelect/MySelect';
 import GenerateImages from '@components/ui/GenerateImages/GenerateImages';
 import { useCreateImagesMutation } from '@services/ImageService.api';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './CreateImageContent.module.scss';
-import { useAppDispatch, useAppSelector } from '@hooks/redux';
+import { useAppDispatch } from '@hooks/redux';
 import { setLoading } from 'slices/MainSlice';
 
 const arrayCountPictures = ['1', '2', '3']
@@ -15,7 +15,8 @@ const arraySizePicturesIndex = ['256x256', '512x512', '1024x1024']
 const CreateImageContent: React.FC = () => {
 
     const dispatch = useAppDispatch()
-    const loading = useAppSelector(state => state.state.loading)
+
+    const ref = useRef<HTMLDivElement>(null)
 
     const [createImages, { data, isLoading, error }] = useCreateImagesMutation()
 
@@ -27,7 +28,6 @@ const CreateImageContent: React.FC = () => {
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setValue(() => event.target.value)
-        console.log(event.target)
     }
 
     const onClickHandler = async () => {
@@ -56,37 +56,41 @@ const CreateImageContent: React.FC = () => {
 
 
     return (
-        <div className={styles.wrapper}>
+        <div ref={ref} className={styles.wrapper}>
             {toggle && !isLoading && !error && <GenerateImages data={data} setToggle={setToggle} />}
             {isError && <Error />}
-            <h1 className={styles.title}>Creating Illusions of Reality:  <br /> The Power of AI image Generation</h1>
-            <p className={styles.text}>
-                Transforming words into art in seconds with AI Image generator.
-            </p>
-            <div className={styles.inputInner}>
-                <textarea
-                    className={styles.input}
-                    onChange={onChangeHandler}
-                    placeholder="Describe what you want to see with phrases and let AI do the rest"
-                    value={value}
-                />
-                <span className={styles.underline} style={{ width: `100%` }}></span>
-            </div>
-            <div className={styles.mySelectInner}>
-                <MySelect
-                    title='Select the number of the pictures'
-                    array={arrayCountPictures}
-                    activeIndex={countPicturesIndex}
-                    setActiveIndex={setCountPicturesIndex}
-                />
-                <GenerateImageBtn onClick={onClickHandler} />
-                <MySelect
-                    title='Choose the size of the pictures'
-                    array={arraySizePicturesIndex}
-                    left={-10}
-                    activeIndex={sizePicturesIndex}
-                    setActiveIndex={setSizePicturesIndex}
-                />
+
+            <div className={styles.innerContent}>
+                <h1 className={styles.title}>Creating Illusions of Reality:  <br /> The Power of AI image Generation</h1>
+                <p className={styles.text}>
+                    Transforming words into art in seconds with AI Image generator.
+                </p>
+                <div className={styles.textareaInner}>
+                    <textarea
+                        className={styles.textarea}
+                        onChange={onChangeHandler}
+                        placeholder="Describe what you want to see with phrases and let AI do the rest"
+                        value={value}
+                    />
+                    <span className={styles.underline} style={{ width: `100%` }}></span>
+                </div>
+                <div className={styles.mySelectInner}>
+                    <MySelect
+                        title='Select the number of the pictures'
+                        array={arrayCountPictures}
+                        activeIndex={countPicturesIndex}
+                        setActiveIndex={setCountPicturesIndex}
+                    />
+                    {ref.current && ref.current?.offsetWidth > 500 && <GenerateImageBtn onClick={onClickHandler} />}
+                    <MySelect
+                        title='Choose the size of the pictures'
+                        array={arraySizePicturesIndex}
+                        left={-0.625}
+                        activeIndex={sizePicturesIndex}
+                        setActiveIndex={setSizePicturesIndex}
+                    />
+                </div>
+                {ref.current && ref.current?.offsetWidth <= 500 && <GenerateImageBtn onClick={onClickHandler} />}
             </div>
             <Carousel />
         </div>

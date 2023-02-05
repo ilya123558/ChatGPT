@@ -7,7 +7,7 @@ import carouselItemImg4 from '@assets/images/carousel/carouselItemImg4.png'
 import carouselItemImg5 from '@assets/images/carousel/carouselItemImg5.png'
 import carouselItemImg6 from '@assets/images/carousel/carouselItemImg6.png'
 import carouselItemImg7 from '@assets/images/carousel/carouselItemImg7.png'
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const carouselList: { description: string, url: any }[] = [{
     description: "An abandoned house in the forest is a derelict and deserted building, typically a single-family home, that is located in a wooded area. The house may have been uninhabited for a significant amount of time, and as a result, has fallen into disrepair. The exterior of the house may be overgrown with vegetation, with broken windows and peeling paint. The interior may be similarly dilapidated, with crumbling plaster, fallen ceilings, and debris on the floor. The surrounding forest may have reclaimed parts of the property, making it difficult to access the house. The overall atmosphere of an abandoned house in the forest is eerie and eerie, with a sense of neglect and abandonment. It can be a place where nature has taken over and the man-made structure is being consumed by it.",
@@ -40,6 +40,8 @@ const carouselList: { description: string, url: any }[] = [{
 
 const Carousel: React.FC = () => {
 
+    const ref = useRef<HTMLLIElement>(null)
+
     const [activeIndex, setActiveIndex] = useState(3)
     const [toggle, setToggle] = useState(-1)
 
@@ -52,12 +54,15 @@ const Carousel: React.FC = () => {
             setActiveIndex(prev => prev - 1)
         }
         else {
-            if (activeIndex === carouselList.length - 3) {
+            if (activeIndex === carouselList.length - (
+                window.innerWidth < 750
+                    ? (window.innerWidth < 500 ? 1 : 2)
+                    : 3
+            )) {
                 setActiveIndex(() => 0)
                 return
             }
             setActiveIndex(prev => prev + 1)
-
         }
     }
 
@@ -73,10 +78,13 @@ const Carousel: React.FC = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.carouselInner}>
-                <ul className={styles.carousel} style={{ transform: `translate(${-406 * activeIndex}px)` }}>
+                <ul className={styles.carousel} style={
+                    { transform: `translate(${-(25.75 * activeIndex)}em)` }
+                }>
                     {
                         carouselList.map((elem, index) => (
                             <li
+                                ref={ref}
                                 key={index}
                                 className={styles.carouselItem}
                                 onMouseEnter={() => setToggle(() => index)}
@@ -95,12 +103,12 @@ const Carousel: React.FC = () => {
                 </ul>
 
                 <button className={`${styles.btn} ${styles.prev}`} onClick={() => onClickHandler('prev')}>
-                    <svg height="6" width="10" xmlns="http://www.w3.org/2000/svg">
+                    <svg xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 3.912L1.282.218a.756.756 0 0 0-1.062 0 .744.744 0 0 0 0 1.056L4.465 5.49l.003.005c.147.146.34.218.532.218a.751.751 0 0 0 .532-.218c.003-.001.003-.003.004-.005l4.245-4.217a.745.745 0 0 0 0-1.056.756.756 0 0 0-1.062 0L5 3.912z" fillRule="evenodd" fill="white"></path>
                     </svg>
                 </button>
                 <button className={`${styles.btn} ${styles.next}`} onClick={() => onClickHandler('next')}>
-                    <svg height="6" width="10" xmlns="http://www.w3.org/2000/svg">
+                    <svg xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 3.912L1.282.218a.756.756 0 0 0-1.062 0 .744.744 0 0 0 0 1.056L4.465 5.49l.003.005c.147.146.34.218.532.218a.751.751 0 0 0 .532-.218c.003-.001.003-.003.004-.005l4.245-4.217a.745.745 0 0 0 0-1.056.756.756 0 0 0-1.062 0L5 3.912z" fillRule="evenodd" fill="white"></path>
                     </svg>
                 </button>

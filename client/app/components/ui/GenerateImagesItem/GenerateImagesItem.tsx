@@ -10,8 +10,8 @@ const GenerateImagesItem: React.FC<{url: string}> = ({url}) => {
                 </div>
                 <div className={styles.back} >
                     <div className={styles.inner}>
-                        <p>Сheck the photo</p>
-                        <span>To download it</span>
+                        <p className={styles.text}>Сheck the photo</p>
+                        <span className={styles.subText}>To download it</span>
                         <div className={styles.btnInner}>
                             <DownloadBtn url={url} />
                         </div>

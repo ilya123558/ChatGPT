@@ -3,20 +3,25 @@
 .wrapper {
     user-select: none;
     z-index: 1;
-    max-width: 900px;
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    display: grid;
     justify-content: center;
+}
+
+.innerContent {
+    display: grid;
+    justify-self: center;
+    width: 57em;
+    grid-template-columns: 1fr;
     align-items: center;
 }
 
 .title {
+    display: inline-block;
     animation: sTransition 10s linear infinite;
-    max-width: 750px;
     font-size: 44px;
     font-weight: 600;
-    line-height: 50px;
+    line-height: 1.14em;
     background: linear-gradient(to right,
             rgb(76, 217, 105),
             rgb(52, 170, 220),
@@ -32,43 +37,42 @@
     text-align: center;
     color: transparent;
     opacity: 0.5;
-    // text-shadow: -2px -2px 0px rgba(5, 5, 5, 0.5);
 }
 
 .text {
-    margin-top: 22px;
-    max-width: 706px;
-    font-size: 14px;
+    display: inline-block;
+    margin-top: 1.5em;
     font-weight: 400;
     color: #fff;
-    line-height: 22px;
+    line-height: 1.5em;
     text-align: center;
     opacity: 0.8;
-    text-shadow: -1px -1px 1px rgb(240, 240, 240, 0.6);
+    text-shadow: -0.07em -0.07em 0.07em rgb(240, 240, 240, 0.6);
 }
 
-.inputInner {
+.textareaInner {
     width: 100%;
-    margin-top: 30px;
+    margin-top: 1.875em;
     text-align: center;
     overflow: hidden;
-    padding: 10px 0px 0px;
+    padding: 0.625em 0.625em 0;
     background-color: rgba($--glow-worm, 0.05);
-    border: 1px solid rgba($--glow-worm, 0.9);
-    border-radius: 5px;
+    border: 0.0625px solid rgba($--glow-worm, 0.9);
+    border-radius: 0.31em;
 
 }
 
-.input {
+.textarea {
     background-color: transparent;
     border: none;
     text-align: center;
     width: 100%;
     font-size: 20px;
     color: rgba($--glow-worm, 0.9);
-    text-shadow: 1px 1px 0px rgba(rgb(95, 202, 216), 0.3);
+    text-shadow: 0.05em 0.05em 0 rgba(rgb(95, 202, 216), 0.3);
     resize: none;
     text-overflow: ellipsis;
+    height: 3em;
 
     &:focus {
         outline: none;
@@ -76,18 +80,18 @@
 
     &::placeholder {
         font-size: 14px;
-        letter-spacing: 3px;
+        letter-spacing: 0.21em;
         color: $--glow-worm;
         opacity: 0.22;
     }
 
     &::-webkit-scrollbar {
-        width: 7px;
+        width: 0.35em;
     }
 
     &::-webkit-scrollbar-thumb {
         background-color: rgba($--glow-worm, 0.3);
-        border-radius: 10px;
+        border-radius: 0.5em;
 
         &:hover {
             background-color: rgba($--glow-worm, 0.8);
@@ -97,11 +101,11 @@
 
 
 .mySelectInner {
-    margin-top: 30px;
+    margin-top: 1.875em;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0px 60px;
+    padding: 0 3.77em;
 }
 
 
@@ -112,5 +116,124 @@
 
     100% {
         background-position: 400%;
+    }
+}
+
+@media (max-height: 850px) {
+
+    .wrapper {
+        font-size: 13px;
+    }
+
+    .textarea {
+        font-size: 16px;
+
+        &::placeholder {
+            font-size: 12px;
+        }
+    }
+
+
+}
+
+@media (max-width: 1050px) {
+
+    .wrapper {
+        font-size: 10px;
+    }
+
+    .textarea {
+        font-size: 13px;
+
+        &::placeholder {
+            font-size: 9px;
+        }
+    }
+
+    .title {
+        font-size: 24px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .wrapper {
+        font-size: 8px;
+    }
+
+    .textareaInner {
+        width: 70%;
+        border-radius: 1em;
+        margin: 3em auto 2em;
+    }
+
+    .textarea {
+        font-size: 8px;
+        line-height: 1em;
+        height: 4em;
+
+
+        &::placeholder {
+            font-size: 5.5px;
+        }
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .mySelectInner {
+        margin: 0 auto;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        width: 70%;
+    }
+
+    @media (min-height: 840px) {
+
+        .textareaInner {
+            margin: 4em auto 2em;
+        }
+
+        .textarea {
+            font-size: 8px;
+            line-height: 1em;
+            height: 4em;
+
+
+            &::placeholder {
+                font-size: 5.5px;
+            }
+        }
+
+        .title {
+            margin-bottom: 1em;
+        }
+
+        .mySelectInner {
+            margin: 2em auto;
+        }
+
+        .innerContent{
+            margin-bottom: 6em;
+        }
+    }
+
+}
+
+
+@media (max-width: 500px) {
+    .innerContent{
+        width: 40em;
+    }
+
+    .title{
+        font-size: 15px;
+    }
+
+    .text{
+        font-size: 7px;
     }
 }

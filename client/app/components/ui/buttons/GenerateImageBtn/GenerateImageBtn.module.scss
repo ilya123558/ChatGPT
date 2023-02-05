@@ -5,27 +5,52 @@ $--btn-color: $--glow-worm;
 $--bg-color: #000;
 
 .generateImageBtn {
-    padding: 25px 30px;
-    margin: 10px 0px;
+    padding: 1.25em 1.25em;
+    margin: 0.5em 0;
     text-decoration: none;
     text-transform: uppercase;
     transition: all 0.5s linear;
-    letter-spacing: 4px;
+    letter-spacing: 0.1em;
     overflow: hidden;
     border: none;
-    border-radius: 10px;
+    border-radius: 0.5em;
     cursor: pointer;
     background-color: transparent;
     font-size: 20px;
     color: rgba($--btn-color, 1);
-    // text-shadow: -1px -1px 1px $--btn-color;
 
     &:hover {
         background: $--btn-color;
         color: rgba(255, 255, 255, 1);
 
-        // text-shadow: -1px -1px 1px #000;
-        box-shadow: 0 0 5px $--btn-color, 0 0 2px $--btn-color,
-            0 0 20px $--btn-color, 0 0 5px $--btn-color;
+        box-shadow: 0 0 0.25em $--btn-color, 0 0 0.1em $--btn-color,
+            0 0 1em $--btn-color, 0 0 0.25em $--btn-color;
+    }
+}
+
+@media (max-height: 850px) {
+    .generateImageBtn {
+        font-size: 16.2px;
+    }
+}
+
+@media (max-width: 1050px) {
+    .generateImageBtn {
+        font-size: 13.6px;
+
+        background: $--btn-color;
+        color: rgba(255, 255, 255, 1);
+
+        box-shadow: 0 0 0.05em $--btn-color, 0 0 0.01em $--btn-color,
+            0 0 0.7em $--btn-color, 0 0 0.15em $--btn-color;
+    }
+}
+
+@media (max-width: 500px) {
+    .generateImageBtn {
+        font-size: 9.6px;
+        width: 70%;
+        margin: 2em auto;
+        
     }
 }
