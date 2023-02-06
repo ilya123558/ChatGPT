@@ -17,22 +17,24 @@ const CreateImageContent: React.FC = () => {
     const dispatch = useAppDispatch()
 
     const ref = useRef<HTMLDivElement>(null)
+    const refTextarea = useRef<HTMLTextAreaElement>(null)
 
     const [createImages, { data, isLoading, error }] = useCreateImagesMutation()
 
     const [toggle, setToggle] = useState(false)
-    const [value, setValue] = useState('')
     const [countPicturesIndex, setCountPicturesIndex] = useState(0)
     const [sizePicturesIndex, setSizePicturesIndex] = useState(0)
     const [isError, setIsError] = useState(false)
 
     const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setValue(() => event.target.value)
+        if (refTextarea.current) {
+            refTextarea.current.value = event.target.value;
+        }
     }
 
     const onClickHandler = async () => {
         await createImages({
-            prompt: value,
+            prompt: refTextarea.current? refTextarea.current.value: '',
             n: Number(arrayCountPictures[countPicturesIndex]),
             size: arraySizePicturesIndex[sizePicturesIndex]
         })
@@ -54,7 +56,6 @@ const CreateImageContent: React.FC = () => {
         }
     }, [error])
 
-
     return (
         <div ref={ref} className={styles.wrapper}>
             {toggle && !isLoading && !error && <GenerateImages data={data} setToggle={setToggle} />}
@@ -67,10 +68,10 @@ const CreateImageContent: React.FC = () => {
                 </p>
                 <div className={styles.textareaInner}>
                     <textarea
+                        ref={refTextarea}
                         className={styles.textarea}
                         onChange={onChangeHandler}
                         placeholder="Describe what you want to see with phrases and let AI do the rest"
-                        value={value}
                     />
                     <span className={styles.underline} style={{ width: `100%` }}></span>
                 </div>

@@ -10,6 +10,7 @@ $--bg-color: #000;
     text-decoration: none;
     text-transform: uppercase;
     transition: all 0.5s linear;
+    transition-delay: 0.4s;
     letter-spacing: 0.1em;
     overflow: hidden;
     border: none;
@@ -18,15 +19,68 @@ $--bg-color: #000;
     background-color: transparent;
     font-size: 20px;
     color: rgba($--btn-color, 1);
+    position: relative;
 
     &:hover {
         background: $--btn-color;
         color: rgba(255, 255, 255, 1);
-
         box-shadow: 0 0 0.25em $--btn-color, 0 0 0.1em $--btn-color,
             0 0 1em $--btn-color, 0 0 0.25em $--btn-color;
+
+        .line_top{
+            left: 100%;
+        }
+
+        .line_right{
+            top: 100%;
+        }
+
+        .line_bottom{
+            right: 100%;
+        }
+
+        .line_left{
+            bottom: 100%;
+        }
+    }
+
+    .line {
+        position: absolute;
+        width: 0.1em;
+        height: 0.1em;
+        transition: 0.3s;
+
+        &_top {
+            width: 100%;
+            top: 0;
+            left: -100%;
+            background-image: linear-gradient(to right, $--btn-color, $--btn-color);
+        }
+
+        &_right {
+            height: 100%;
+            top: -100%;
+            right: 0;
+            background-image: linear-gradient(to bottom, $--btn-color, $--btn-color);
+        }
+
+        &_bottom {
+            width: 100%;
+            bottom: 0;
+            right: -100%;
+            background-image: linear-gradient(to bottom, $--btn-color, $--btn-color);
+        }
+
+        &_left {
+            height: 100%;
+            bottom: -100%;
+            left: 0;
+            background-image: linear-gradient(to bottom, $--btn-color, $--btn-color);
+        }
     }
 }
+
+
 
 @media (max-height: 850px) {
     .generateImageBtn {
@@ -51,6 +105,6 @@ $--bg-color: #000;
         font-size: 9.6px;
         width: 70%;
         margin: 2em auto;
-        
+
     }
 }

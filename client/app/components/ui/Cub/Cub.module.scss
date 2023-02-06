@@ -1,0 +1,65 @@
+.wrapper {
+    position: relative;
+    height: 10em;
+    width: 10em;
+    perspective: 30em;
+    font-size: 5px;
+}
+
+.cub {
+    width: inherit;
+    height: inherit;
+    transform-style: preserve-3d;
+    transition: 0.2s;
+    width: inherit;
+}
+
+.side {
+    position: absolute;
+    height: inherit;
+    border: 0.2em solid rgba(#686868, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(#aaaaa9, rgba(#202020, 1));
+    text-transform: uppercase;
+    color: rgb(192, 188, 188);
+    font-weight: bold;
+    text-shadow: 0.1em 0.1em 0.2em #000;
+    height: inherit;
+    width: inherit;
+
+    p {
+        font-size: 2em;
+    }
+}
+
+.front {
+    transform: translateZ(5em);
+}
+
+.back {
+    transform: translateZ(-5em) rotateY(180deg);
+}
+
+.left {
+    transform: translateX(5em) rotateY(90deg);
+}
+
+.right {
+    transform: translateX(-5em) rotateY(-90deg);
+}
+
+.top {
+    transform: translateY(-5em) rotateX(-90deg);
+}
+
+.bottom {
+    transform: translateY(5em) rotateX(90deg);
+}
+
+@media (max-width: 900) {
+    .wrapper {
+        font-size: 4px;
+    }
+}

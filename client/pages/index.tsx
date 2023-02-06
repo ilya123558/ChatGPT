@@ -21,7 +21,6 @@ export default function Home() {
 
   return (
     <>
-
       {(isLoading || loading) && <Loading />}
       <section className={styles.home}>
         <div className={styles.wrapper}>
