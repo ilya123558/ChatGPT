@@ -1,0 +1,48 @@
+.navbar {
+    height: 100%;
+    width: 40em;
+
+    &__list {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        height: 100%;
+    }
+
+    &__item {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        padding: 0 0.15em;
+        margin-left: 4em;
+
+        &:hover {
+            .navbar__line {
+                left: 0%;
+            }
+        }
+    }
+
+    &__btn {
+        border: none;
+        color: aliceblue;
+        background: none;
+        font-family: 'Roboto-Light';
+        text-transform: uppercase;
+        letter-spacing: 0.25em;
+        font-size: 10px; 
+        cursor: pointer;
+
+    }
+
+    &__line {
+        transition: 0.3s;
+        position: absolute;
+        left: -100%;
+        width: 100%;
+        background: linear-gradient(to right, #04d9ff, #04d9ff);
+        width: 100%;
+        height: 0.05em;
+        bottom: 0.3em;
+    }
+}

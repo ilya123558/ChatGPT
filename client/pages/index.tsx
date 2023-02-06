@@ -4,27 +4,20 @@ import HomeMain from '@components/ui/MainContent/MainContent';
 import Loading from '@components/ui/Loading/Loading';
 import { useAppSelector } from '@hooks/redux';
 import { useGetUserQuery } from '@services/UserService.api';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import Meta from '@utils/meta/Meta';
 
 export default function Home() {
-  const router = useRouter()
   const loading = useAppSelector(state => state.state.loading)
 
   const { isLoading, error } = useGetUserQuery(null)
 
-  useEffect(() => {
-    if (error) {
-      router.push('/auth/login')
-    }
-  }, [error])
-
   return (
     <>
       {(isLoading || loading) && <Loading />}
+      <Meta title='Rezis' description='home chat generate image'/>
       <section className={styles.home}>
         <div className={styles.wrapper}>
-          <Header />
+          <Header auth={!error}/>
           <HomeMain />
         </div>
       </section>

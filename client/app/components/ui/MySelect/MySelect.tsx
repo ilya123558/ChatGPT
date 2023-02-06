@@ -28,8 +28,8 @@ const MySelect: React.FC<IProps> = ({ array, title, left, activeIndex, setActive
                         </li>
                     ))
                 }
+                <div className={styles.decorCercle} style={{ left: activeIndex ? (3.75 * activeIndex + 0.525) + 'em' : '.525em' }}></div>
             </ul>
-            <div className={styles.decorCercle} style={{ left: activeIndex ? (3.75 * activeIndex + 1.125) + 'em' : '1.125em' }}></div>
         </div>
     );
 };

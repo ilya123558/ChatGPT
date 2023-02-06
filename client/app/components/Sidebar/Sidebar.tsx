@@ -25,7 +25,6 @@ const Sidebar: React.FC = () => {
                 <div className={styles.buttonsInner}>
                     <DeleteChatList />
                     <BackHomeBtnChatPage />
-                    <LogoutBtn />
                 </div>
             </div>
         </section>

@@ -32,6 +32,6 @@ const HomeMain: React.FC = () => {
             </div>
         </main >
     );
-};
+}; 
 
 export default HomeMain;

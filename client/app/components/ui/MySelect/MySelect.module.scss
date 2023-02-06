@@ -24,7 +24,6 @@
     transition: all 0.2s;
     height: 0.875em;
     background-color: $--glow-worm;
-    bottom: 2.1875em;
     box-shadow: 0 0 0.625em $--glow-worm, 0 0 0.5em $--glow-worm,
         0 0 1em $--glow-worm, 0 0 1em $--glow-worm;
 }
@@ -140,7 +139,6 @@
     }
 
     .decorCercle {
-        bottom: 0.5em;
         box-shadow: 0 0 0.625em $--glow-worm, 0 0 0.5em $--glow-worm,
             0 0 1em $--glow-worm, 0 0 1em $--glow-worm;
     }
