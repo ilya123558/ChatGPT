@@ -17,7 +17,6 @@
         width: 57em;
         margin: 0 auto;
     }
-
 }
 
 .item {
@@ -25,6 +24,8 @@
     height: 100%;
     position: relative;
     cursor: pointer;
+    transition: all 1s;
+    transform: rotateY(360deg);
 
     &:hover {
         .item__bg {
@@ -58,6 +59,7 @@
         height: 100%;
         position: absolute;
         border-radius: 0.6em;
+        backface-visibility: hidden;
     }
 
     &__image {
@@ -71,6 +73,7 @@
         bottom: 0;
         opacity: 0;
         transition: all 0.8s;
+        backface-visibility: hidden;
     }
 
     &__title {
@@ -89,5 +92,60 @@
         position: absolute;
         transition: all 0.8s;
         bottom: -1em;
+        backface-visibility: hidden;
     }
+}
+
+.item_about {
+    width: 24em;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.5s;
+    transform-style: preserve-3d;
+    transform: rotateY(180deg);
+    background-image: linear-gradient(to top left,
+            rgba(150, 150, 150, 0.514),
+            rgba(199, 196, 196, 0.548),
+            rgba(175, 175, 175, 0.603),
+            rgba(216, 214, 214, 0.603),
+            rgba(161, 160, 160, 0.568),
+            rgba(255, 255, 255, 0.315));
+    backface-visibility: visible;
+    border-radius: 0.6em;
+
+    .item_about__text {
+        opacity: 1;
+    }
+
+    .item__title_text {
+        transition: all 0.8s;
+        position: absolute;
+        transform: rotateY(180deg);
+        bottom: -4.5em;
+        font-weight: bold;
+        font-size: 2em;
+        color: rgb(255, 255, 255);
+        left: 0;
+        right: 0;
+        backface-visibility: visible;
+        text-shadow: 0.02em 0.02em 0.1em rgba(255, 255, 255, 0.5);
+    }
+
+    &:hover {
+        scale: 1.1;
+        box-shadow: 0.3em 0em 0em 0em rgba(187, 187, 187, 0.9), 0.6em 0em 0em 0em rgba(161, 159, 159, 0.5), 0.9em 0em 0em 0em rgba(255, 255, 255, 0.2), ;
+    }
+}
+
+.item_about__text {
+    transform: rotateY(180deg);
+    padding: .5em 1em;
+    color: #000000ea;
+    text-shadow: 0.05em 0.05em 0em rgba(#ffffff, 0.5);
+    line-height: 1.7em;
+    font-size: 20px;
+    font-weight: bold;
+    opacity: 0;
+    transition: 1.7s;
 }

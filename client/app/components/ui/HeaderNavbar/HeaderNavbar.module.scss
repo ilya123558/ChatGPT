@@ -1,6 +1,7 @@
 .navbar {
     height: 100%;
-    width: 40em;
+    width: 45em;
+    
 
     &__list {
         display: flex;
@@ -12,7 +13,6 @@
     &__item {
         position: relative;
         overflow: hidden;
-        cursor: pointer;
         padding: 0 0.15em;
         margin-left: 4em;
 
@@ -30,9 +30,8 @@
         font-family: 'Roboto-Light';
         text-transform: uppercase;
         letter-spacing: 0.25em;
-        font-size: 10px; 
+        font-size: 10px;
         cursor: pointer;
-
     }
 
     &__line {
@@ -44,5 +43,152 @@
         width: 100%;
         height: 0.05em;
         bottom: 0.3em;
+    }
+}
+
+.social {
+
+    &__svg {
+        transition: all 0.5s;
+        position: absolute;
+        width: 0.65em;
+        height: 0.65em;
+        right: -0.8em;
+        top: 0.55em;
+        cursor: pointer;
+    }
+
+    &__popup {
+        width: 8em;
+        min-height: 3em;
+        position: absolute;
+        z-index: 1;
+        padding: 0 0.5em;
+        right: -10em;
+        top: 0.5em;
+        transform-origin: top;
+    }
+
+    &__bg {
+        position: absolute;
+        background-color: rgb(255, 255, 255);
+        width: inherit;
+        height: inherit;
+        border-radius: 0.4em;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: -1;
+        transform-origin: top;
+
+        &_active {
+            transform: scaleY(0);
+            opacity: 1;
+            animation: socialToggleTrue 0.8s forwards;
+        }
+
+        &_hidden {
+            transform: scaleY(1);
+            opacity: 0;
+            animation: socialToggleFalse 0.8s forwards;
+        }
+    }
+
+
+    &__inner {
+
+        &_item {
+            display: flex;
+            align-items: center;
+            margin: 0.3em 0;
+
+            &_active {
+                cursor: pointer;
+                opacity: 0;
+                animation: socialToggleItemTrue 0.5s forwards;
+            }
+
+            &_hidden {
+                animation: socialToggleItemFalse 0.5s forwards;
+            }
+        }
+
+        p {
+            transition: 0.3s;
+            color: rgb(0, 0, 0);
+            margin-left: 0.5em;
+            font-weight: bold;
+            text-shadow: 0.04em 0.04em 0.05em rgba(#00043a, .8);
+            opacity: 0.8;
+        }
+
+        &:hover {
+            p {
+                color: rgb(32, 21, 133);
+            }
+        }
+    }
+
+    &__item {
+        width: 1.65em;
+        height: 1.65em;
+
+        &_telegram {
+            color: rgb(58, 58, 247);
+        }
+
+        &_instagram {
+            color: rgb(172, 175, 3);
+        }
+
+        &_vk {
+            color: rgb(58, 58, 247);
+        }
+
+        &_git {
+            color: black;
+        }
+    }
+
+}
+
+@keyframes socialToggleTrue {
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes socialToggleFalse {
+    99% {
+        transform: scaleY(0);
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes socialToggleItemTrue {
+    0% {
+        display: block;
+        transform: translateX(10em);
+    }
+
+    100% {
+        transform: translateX(0em);
+        opacity: 1;
+    }
+}
+
+@keyframes socialToggleItemFalse {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(10em);
+        opacity: 0;
     }
 }

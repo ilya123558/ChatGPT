@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import LogoutBtn from '../buttons/LogoutBtn/LogoutBtn';
 import HeaderNavbar from '../HeaderNavbar/HeaderNavbar';
+import Link from 'next/link';
 
 const Header: React.FC<{ auth: boolean }> = ({ auth }) => {
     const router = useRouter()
@@ -14,10 +15,10 @@ const Header: React.FC<{ auth: boolean }> = ({ auth }) => {
 
     return (
         <header className={styles.header}>
-            <div className={styles.logo__inner}>
+            <Link href={'/'} className={styles.logo__inner}>
                 <Image className={styles.logo__image} src={logo} alt="img" />
                 <p className={styles.logo__text}>Rezis</p>
-            </div>
+            </Link>
             <HeaderNavbar />
             {auth
                 ? <LogoutBtn />
